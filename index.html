@@ -31,7 +31,7 @@
       /* how much the hawk video moves UP (increase = higher) */
       --video-lift: 80px;
 
-      /* FIX 1: CTA box positions. Negative = move LEFT (back), positive = move RIGHT */
+      /* CTA box positions. Negative = move LEFT (back), positive = move RIGHT */
       --cta-logo-shift: -25px;
       --cta-text-shift: -70px;
     }
@@ -377,6 +377,27 @@
     .video-frame video::-webkit-media-controls-overlay-play-button {
       display: none !important;
       -webkit-appearance: none;
+    }
+
+    /* BACKUP PICTURE: shown only if the video cannot load */
+    .video-fallback {
+      display: none;
+      width: 100%;
+      height: auto;
+      max-height: 440px;
+      object-fit: contain;
+      object-position: center;
+      background: #000;
+      mix-blend-mode: screen;
+      filter: contrast(2) brightness(1.05);
+    }
+
+    .video-frame.use-fallback video {
+      display: none
+    }
+
+    .video-frame.use-fallback .video-fallback {
+      display: block
     }
 
     .people-card {
@@ -895,14 +916,12 @@
       overflow: hidden
     }
 
-    /* FIX 1: logo moved a bit back (left) */
     .cta-box .eagle-mark {
       width: 200px;
       margin: 0;
       transform: translateX(var(--cta-logo-shift));
     }
 
-    /* FIX 1: "Ready to Scale" block moved a bit back (left) */
     .cta-content {
       text-align: center;
       transform: translateX(var(--cta-text-shift));
@@ -966,7 +985,6 @@
       padding-bottom: 40px
     }
 
-    /* FIX 2: bigger footer logo + brand text */
     .site-footer .brand {
       gap: 15px
     }
@@ -988,7 +1006,6 @@
       margin-top: 6px
     }
 
-    /* FIX 2: bigger footer description, headings and links */
     .footer-description {
       max-width: 420px;
       margin: 20px 0 0;
@@ -1167,7 +1184,6 @@
         transform: none
       }
 
-      /* FIX 1: no shifting on tablet/mobile */
       .cta-content {
         transform: none
       }
@@ -1347,7 +1363,6 @@
         font-size: 16px
       }
 
-      /* FIX 2: footer sizes on mobile */
       .site-footer .brand-mark {
         width: 52px;
         height: 52px;
@@ -1724,12 +1739,15 @@
         </div>
 
         <div class="hero-visual" id="hero-video">
-          <div class="video-frame">
+          <div class="video-frame" id="videoFrame">
+            <!-- ?v=2 forces the browser to load the newest video (change to ?v=3 if you replace the file again) -->
             <video id="heroVideo" muted autoplay loop playsinline preload="auto" disablepictureinpicture
               disableremoteplayback controlslist="nodownload noplaybackrate noremoteplayback nofullscreen"
               aria-label="Team Hawks overview video">
-              <source src="hero.mp4" type="video/mp4">
+              <source src="hero.mp4?v=2" type="video/mp4">
             </video>
+            <!-- backup picture, shown only if the video cannot load -->
+            <img class="video-fallback" id="videoFallback" src="hawk.jpg" alt="Team Hawks">
           </div>
           <div class="people-card">
             <strong>250+</strong>
@@ -2148,7 +2166,6 @@
           <div class="cta-content">
             <h2 class="cta-title">Ready to Scale with Precision?</h2>
             <p class="cta-text">Let's build smarter teams, deliver bigger results, and achieve more—together.</p>
-            <!-- FIX 1: "No Obligation • Zero Risk • 100% Confidential" removed -->
             <div class="cta-row">
               <a class="cta-btn" href="https://wa.me/923456115222" target="_blank" rel="noopener noreferrer">Book Your
                 Free Strategy Call →</a>
@@ -2247,6 +2264,7 @@
     /* HERO VIDEO */
     (function () {
       const video = document.getElementById('heroVideo');
+      const frame = document.getElementById('videoFrame');
 
       if (!video) return;
 
@@ -2269,6 +2287,24 @@
       applySpeed();
       video.addEventListener('loadedmetadata', applySpeed);
       video.addEventListener('play', applySpeed);
+
+      /* BACKUP PICTURE: show hawk.jpg if the video cannot load */
+      function showFallback() {
+        if (frame) frame.classList.add('use-fallback');
+      }
+      function hideFallback() {
+        if (frame) frame.classList.remove('use-fallback');
+      }
+
+      video.addEventListener('error', showFallback);
+      const sourceEl = video.querySelector('source');
+      if (sourceEl) sourceEl.addEventListener('error', showFallback);
+      video.addEventListener('loadeddata', hideFallback);
+
+      // If nothing has loaded after 6 seconds, use the backup picture
+      setTimeout(function () {
+        if (video.readyState === 0) showFallback();
+      }, 6000);
 
       if (reduceMotion) {
         video.removeAttribute('autoplay');
