@@ -31,9 +31,13 @@
       /* how much the hawk video moves UP (increase = higher) */
       --video-lift: 80px;
 
-      /* FIX 1: CTA box positions. Negative = move LEFT (back), positive = move RIGHT */
-      --cta-logo-shift: -25px;
+      /* CTA box positions. Negative = move LEFT (back), positive = move RIGHT */
+      --cta-logo-shift: -10px;
       --cta-text-shift: -70px;
+
+      /* EAGLE LOGO SIZE - change these numbers to make it bigger / smaller */
+      --eagle-size: 190px;      /* eagle above "What Our Clients Say" */
+      --cta-eagle-size: 270px;  /* eagle inside the "Ready to Scale" box */
     }
 
     * {
@@ -933,13 +937,17 @@
       padding: 70px 0 0
     }
 
-    /* EAGLE LOGO */
+    /* EAGLE LOGO - LARGER + BRIGHTER
+       brightness lifts the gold, contrast keeps the dark image background pure black
+       (so the box stays hidden), saturate makes the gold richer,
+       drop-shadow adds a soft golden glow */
     .eagle-mark {
       display: block;
-      width: 100px;
+      width: var(--eagle-size);
+      max-width: 100%;
       height: auto;
-      margin: 0 auto 6px;
-      filter: contrast(2) brightness(1.05);
+      margin: 0 auto 10px;
+      filter: brightness(1.3) contrast(1.35) saturate(1.2) drop-shadow(0 0 14px rgba(245, 166, 35, .35));
       mix-blend-mode: screen;
     }
 
@@ -1020,7 +1028,7 @@
     .cta-box {
       position: relative;
       display: grid;
-      grid-template-columns: 220px 1fr;
+      grid-template-columns: 290px 1fr;
       align-items: center;
       gap: 10px;
       padding: 34px 40px;
@@ -1030,14 +1038,14 @@
       overflow: hidden
     }
 
-    /* FIX 1: logo moved a bit back (left) */
+    /* bigger + brighter eagle inside the CTA box */
     .cta-box .eagle-mark {
-      width: 200px;
+      width: var(--cta-eagle-size);
       margin: 0;
       transform: translateX(var(--cta-logo-shift));
     }
 
-    /* FIX 1: "Ready to Scale" block moved a bit back (left) */
+    /* "Ready to Scale" block moved a bit back (left) */
     .cta-content {
       text-align: center;
       transform: translateX(var(--cta-text-shift));
@@ -1101,7 +1109,7 @@
       padding-bottom: 40px
     }
 
-    /* FIX 2: bigger footer logo + brand text */
+    /* bigger footer logo + brand text */
     .site-footer .brand {
       gap: 15px
     }
@@ -1123,7 +1131,7 @@
       margin-top: 6px
     }
 
-    /* FIX 2: bigger footer description, headings and links */
+    /* bigger footer description, headings and links */
     .footer-description {
       max-width: 420px;
       margin: 20px 0 0;
@@ -1298,11 +1306,11 @@
 
       .cta-box .eagle-mark {
         margin: 0 auto;
-        width: 170px;
+        width: 220px;
         transform: none
       }
 
-      /* FIX 1: no shifting on tablet/mobile */
+      /* no shifting on tablet/mobile */
       .cta-content {
         transform: none
       }
@@ -1351,6 +1359,7 @@
     @media(max-width:600px) {
       :root {
         --video-lift: 50px;
+        --eagle-size: 150px;
       }
 
       .wrap {
@@ -1475,6 +1484,10 @@
         font-size: 14px
       }
 
+      .cta-box .eagle-mark {
+        width: 190px
+      }
+
       .cta-btn {
         width: 100%;
         justify-content: center;
@@ -1482,7 +1495,7 @@
         font-size: 16px
       }
 
-      /* FIX 2: footer sizes on mobile */
+      /* footer sizes on mobile */
       .site-footer .brand-mark {
         width: 52px;
         height: 52px;
@@ -2423,13 +2436,12 @@
       flex-shrink: 0;
     }
 
-   
-img.footer-logo {
-    width: 65px;
-    height: 65px;
-    object-fit: contain;
-    display: block;
-}
+    img.footer-logo {
+      width: 65px;
+      height: 65px;
+      object-fit: contain;
+      display: block;
+    }
 
   </style>
 
@@ -2441,7 +2453,7 @@ img.footer-logo {
   <div id="page-loader">
     <div class="loader-content">
 
-    <img src="./team-hawks-site/logo.jpg" alt="Team Hawks Logo" class="loader-logo">
+      <img src="./team-hawks-site/logo.jpg" alt="Team Hawks Logo" class="loader-logo">
 
       <h2>TEAM <span>HAWKS</span></h2>
 
@@ -2458,7 +2470,7 @@ img.footer-logo {
     <div class="wrap nav-inner">
       <a class="brand" href="#home" aria-label="Team Hawks home">
 
-   <img src="./team-hawks-site/logo.jpg" alt="Team Hawks Logo" class="brand-mark">
+        <img src="./team-hawks-site/logo.jpg" alt="Team Hawks Logo" class="brand-mark">
 
         <span class="brand-copy">
           <span class="brand-name">Team <span>Hawks</span></span>
@@ -2511,7 +2523,7 @@ img.footer-logo {
             <video id="heroVideo" muted autoplay loop playsinline preload="auto" disablepictureinpicture
               disableremoteplayback controlslist="nodownload noplaybackrate noremoteplayback nofullscreen"
               aria-label="Team Hawks overview video">
-<source src="./team-hawks-site/hero.mp4" type="video/mp4">
+              <source src="./team-hawks-site/hero.mp4" type="video/mp4">
             </video>
           </div>
           <div class="people-card">
@@ -2772,7 +2784,7 @@ img.footer-logo {
     <section class="ti-clients" id="about">
       <div class="wrap">
         <div class="ti-head">
-        <img class="eagle-mark" src="./team-hawks-site/hawk.jpg" alt="Team Hawks logo">
+          <img class="eagle-mark" src="./team-hawks-site/hawk.jpg" alt="Team Hawks logo">
           <h2 class="ti-title">What Our Clients Say</h2>
           <p class="ti-sub">Real feedback from partners who scaled with confidence.</p>
         </div>
@@ -2927,11 +2939,10 @@ img.footer-logo {
     <section class="cta-wrap" id="contact">
       <div class="wrap">
         <div class="cta-box">
-        <img class="eagle-mark" src="./team-hawks-site/eagle.jpg" alt="">
+          <img class="eagle-mark" src="./team-hawks-site/eagle.jpg" alt="">
           <div class="cta-content">
             <h2 class="cta-title">Ready to Scale with Precision?</h2>
             <p class="cta-text">Let's build smarter teams, deliver bigger results, and achieve more—together.</p>
-            <!-- FIX 1: "No Obligation • Zero Risk • 100% Confidential" removed -->
             <div class="cta-row">
               <a class="cta-btn" href="https://wa.me/923456115222" target="_blank" rel="noopener noreferrer">Book Your
                 Free Strategy Call →</a>
