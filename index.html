@@ -1683,6 +1683,34 @@
         padding: 19px
       }
     }
+    
+/* TEAM HAWKS LOGO — HEADER & FOOTER */
+img.brand-mark {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+}
+
+/* Larger footer logo */
+.site-footer img.brand-mark {
+  width: 65px;
+  height: 65px;
+}
+
+/* Footer logo on mobile */
+@media (max-width: 600px) {
+  .site-footer img.brand-mark {
+    width: 65px;
+    height: 65px;
+  }
+}
+
   </style>
 </head>
 
@@ -1691,7 +1719,7 @@
   <header class="site-header">
     <div class="wrap nav-inner">
       <a class="brand" href="#home" aria-label="Team Hawks home">
-        <span class="brand-mark">TH</span>
+      <img src="./logo.jpg" alt="Team Hawks Logo" class="brand-mark">
         <span class="brand-copy">
           <span class="brand-name">Team <span>Hawks</span></span>
           <span class="brand-tag">OUTSOURCING EXCELLENCE</span>
@@ -2182,7 +2210,7 @@
       <div class="footer-main">
         <div class="footer-brand-col">
           <a class="brand" href="#home">
-            <span class="brand-mark">TH</span>
+        <img src="./logo.jpg" alt="Team Hawks Logo" class="brand-mark">
             <span class="brand-copy">
               <span class="brand-name">Team <span>Hawks</span></span>
               <span class="brand-tag">OUTSOURCING EXCELLENCE</span>
