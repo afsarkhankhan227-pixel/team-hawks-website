@@ -35,13 +35,16 @@
       --cta-logo-shift: -10px;
       --cta-text-shift: -70px;
 
-    /* EAGLE LOGO SIZE */
+ 
+/* EAGLE LOGO SIZE */
 --eagle-size: 120px;
 --cta-eagle-size: 160px;
+}
 
-    * {
-      box-sizing: border-box
-    }
+* {
+  box-sizing: border-box;
+}
+
 
     html {
       scroll-behavior: smooth;
@@ -2313,67 +2316,64 @@
       }
     }
 
-    /* ANIMATED TEAM HAWKS INTRO TEXT */
-    .loader-content h2 {
-      margin: 0;
-      color: #f5f5f5;
-      font-size: 25px;
-      font-weight: 800;
-      letter-spacing: 3px;
-      overflow: hidden;
-      animation: hawks-text-reveal 0.9s ease-out both;
-    }
+/* ANIMATED TEAM HAWKS INTRO TEXT */
+.loader-content h2 {
+  margin: 0;
+  color: #f5f5f5;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  overflow: hidden;
+  animation: hawks-text-reveal 1.1s ease-out both;
+}
 
-    .loader-content h2 span {
-      color: #e8b04a;
-      display: inline-block;
-      animation: hawks-gold-reveal 0.9s ease-out both;
-      animation-delay: 0.25s;
-    }
+.loader-content h2 span {
+  color: #e8b04a;
+  display: inline-block;
+  animation: hawks-gold-reveal 0.8s ease-out 0.35s both;
+}
 
-    .loader-content p {
-      animation: hawks-subtitle-reveal 0.7s ease-out both;
-      animation-delay: 0.35s;
-    }
+.loader-content p {
+  animation: hawks-subtitle-reveal 0.7s ease-out 0.6s both;
+}
 
-    @keyframes hawks-text-reveal {
-      from {
-        opacity: 0;
-        clip-path: inset(0 100% 0 0);
-        transform: translateY(8px);
-      }
+@keyframes hawks-text-reveal {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transform: translateY(8px);
+  }
 
-      to {
-        opacity: 1;
-        clip-path: inset(0 0 0 0);
-        transform: translateY(0);
-      }
-    }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
+}
 
-    @keyframes hawks-gold-reveal {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
+@keyframes hawks-gold-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    @keyframes hawks-subtitle-reveal {
-      from {
-        opacity: 0;
-        transform: translateY(6px);
-      }
+@keyframes hawks-subtitle-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
     /* TEAM HAWKS — SUBTLE EAGLE VIDEO ENHANCEMENT */
 
     /* Keep the existing hero video layout unchanged */
@@ -2444,6 +2444,36 @@
       object-fit: contain;
       display: block;
     }
+    
+/* TEAM HAWKS — BRAND SLIDER FIX */
+.brand-viewport {
+  overflow: hidden;
+}
+
+.brand-track {
+  display: flex;
+  width: max-content;
+  animation: brand-scroll 32s linear infinite;
+  animation-play-state: running;
+  will-change: transform;
+}
+
+@keyframes brand-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 600px) {
+  .brand-track {
+    animation-duration: 26s;
+  }
+}
+
 
   </style>
 
