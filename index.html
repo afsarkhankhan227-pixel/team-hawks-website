@@ -940,15 +940,18 @@
        brightness lifts the gold, contrast keeps the dark image background pure black
        (so the box stays hidden), saturate makes the gold richer,
        drop-shadow adds a soft golden glow */
-    .eagle-mark {
-      display: block;
-      width: var(--eagle-size);
-      max-width: 100%;
-      height: auto;
-      margin: 0 auto 10px;
-      filter: brightness(1.3) contrast(1.35) saturate(1.2) drop-shadow(0 0 14px rgba(245, 166, 35, .35));
-      mix-blend-mode: screen;
-    }
+  
+
+.eagle-mark {
+  display: block;
+  width: var(--eagle-size);
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 10px;
+  filter: none;
+  mix-blend-mode: normal;
+}
+
 
     .ti-cards {
       display: grid;
