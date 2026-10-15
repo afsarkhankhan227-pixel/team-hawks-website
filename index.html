@@ -2741,6 +2741,26 @@ img.footer-logo {
   color: #d4af37 !important;
   opacity: 1 !important;
 }
+    
+/* HOW WE WORK — BACKGROUND COLOR FIX */
+section:has(.process-grid) {
+  background: #08090b !important;
+  background-color: #08090b !important;
+}
+
+section:has(.process-grid)::before,
+section:has(.process-grid)::after {
+  background: transparent !important;
+  opacity: 0 !important;
+}
+
+.process-grid,
+.process-card {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
 
 
 
