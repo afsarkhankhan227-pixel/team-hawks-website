@@ -951,10 +951,15 @@
   max-width: 100%;
   height: auto;
   margin: 0 auto 10px;
-  filter: none;
-  mix-blend-mode: normal;
-}
 
+  /* crush the dark image background to pure black, keep the gold bright */
+  filter: brightness(0.9) contrast(1.9);
+  mix-blend-mode: screen;
+
+  /* soften the edges so no box outline is visible */
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 60%, transparent 98%);
+  mask-image: radial-gradient(ellipse at center, #000 60%, transparent 98%);
+}
 
     .ti-cards {
       display: grid;
