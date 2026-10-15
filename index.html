@@ -2764,6 +2764,89 @@ html body section#how-we-work.work-process > .work-process-wrap {
   display: block;
   object-fit: contain;
 }
+    /* TEAM HAWKS — FLOATING GLASS BADGES (HERO) */
+.float-badge {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 16px;
+  border: 1px solid rgba(232, 176, 74, 0.35);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  animation: hawks-float 5s ease-in-out infinite;
+}
+
+.float-badge-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(245, 166, 35, 0.14);
+  border: 1px solid rgba(245, 166, 35, 0.4);
+  color: var(--gold);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.float-badge strong {
+  display: block;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.float-badge span.fb-label {
+  display: block;
+  margin-top: 2px;
+  color: #b9bdc4;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.float-badge.fb-1 { top: 6%;  left: 0;   animation-delay: 0s; }
+.float-badge.fb-2 { top: 20%; right: 0;  animation-delay: 1.4s; }
+.float-badge.fb-3 { top: 50%; left: 2%;  animation-delay: 2.6s; }
+
+@keyframes hawks-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+@media (max-width: 600px) {
+  .float-badge {
+    padding: 8px 11px;
+    gap: 8px;
+    border-radius: 11px;
+  }
+
+  .float-badge-icon {
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
+
+  .float-badge strong { font-size: 13px; }
+  .float-badge span.fb-label { font-size: 9px; }
+
+  .float-badge.fb-1 { top: 2%;  left: -4px; }
+  .float-badge.fb-2 { top: 14%; right: -4px; }
+  .float-badge.fb-3 { top: 44%; left: -4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-badge { animation: none; }
+}
 
   </style>
 
@@ -2847,6 +2930,29 @@ html body section#how-we-work.work-process > .work-process-wrap {
               aria-label="Team Hawks overview video">
               <source src="./team-hawks-site/hero.mp4" type="video/mp4">
             </video>
+          </div>
+                    <div class="float-badge fb-1">
+            <div class="float-badge-icon">↗</div>
+            <div>
+              <strong>98%</strong>
+              <span class="fb-label">Retention</span>
+            </div>
+          </div>
+
+          <div class="float-badge fb-2">
+            <div class="float-badge-icon">☎</div>
+            <div>
+              <strong>24/7</strong>
+              <span class="fb-label">Support</span>
+            </div>
+          </div>
+
+          <div class="float-badge fb-3">
+            <div class="float-badge-icon">◎</div>
+            <div>
+              <strong>150+</strong>
+              <span class="fb-label">Projects Delivered</span>
+            </div>
           </div>
           <div class="people-card">
             <strong>250+</strong>
