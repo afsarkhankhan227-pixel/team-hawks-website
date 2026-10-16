@@ -2764,7 +2764,7 @@ html body section#how-we-work.work-process > .work-process-wrap {
   display: block;
   object-fit: contain;
 }
-    /* TEAM HAWKS — FLOATING GLASS BADGES (HERO) */
+  /* TEAM HAWKS — FLOATING GLASS BADGES (HERO) */
 .float-badge {
   position: absolute;
   z-index: 3;
@@ -2779,8 +2779,11 @@ html body section#how-we-work.work-process > .work-process-wrap {
   backdrop-filter: blur(14px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  pointer-events: none;
+  cursor: pointer;
+  text-decoration: none;
   animation: hawks-float 5s ease-in-out infinite;
+  transition: border-color 0.3s ease, background 0.3s ease,
+    box-shadow 0.3s ease, translate 0.3s ease, scale 0.3s ease;
 }
 
 .float-badge-icon {
@@ -2795,6 +2798,7 @@ html body section#how-we-work.work-process > .work-process-wrap {
   color: var(--gold);
   font-size: 15px;
   font-weight: 800;
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .float-badge strong {
@@ -2803,6 +2807,7 @@ html body section#how-we-work.work-process > .work-process-wrap {
   font-size: 16px;
   font-weight: 800;
   line-height: 1.15;
+  transition: color 0.3s ease;
 }
 
 .float-badge span.fb-label {
@@ -2814,13 +2819,51 @@ html body section#how-we-work.work-process > .work-process-wrap {
   letter-spacing: 0.3px;
 }
 
-.float-badge.fb-1 { top: 6%;  left: 0;   animation-delay: 0s; }
-.float-badge.fb-2 { top: 20%; right: 0;  animation-delay: 1.4s; }
-.float-badge.fb-3 { top: 50%; left: 2%;  animation-delay: 2.6s; }
+/* positions: AROUND the eagle, never on top of it */
+.float-badge.fb-1 { top: 4%;       left: 0;  animation-delay: 0s; }
+.float-badge.fb-2 { bottom: 118px; right: 0; animation-delay: 1.4s; }
+.float-badge.fb-3 { bottom: 118px; left: 0;  animation-delay: 2.6s; }
 
 @keyframes hawks-float {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-10px); }
+}
+
+/* GOLDEN HOVER */
+.float-badge:hover,
+.float-badge:focus-visible {
+  animation-play-state: paused;
+  translate: 0 -4px;
+  scale: 1.06;
+  outline: none;
+  border-color: #f5a623;
+  background: linear-gradient(135deg,
+      rgba(245, 166, 35, 0.24),
+      rgba(245, 166, 35, 0.06));
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5),
+    0 0 26px rgba(245, 166, 35, 0.45),
+    inset 0 1px 0 rgba(255, 215, 130, 0.25);
+}
+
+.float-badge:hover .float-badge-icon,
+.float-badge:focus-visible .float-badge-icon {
+  background: #f5a623;
+  color: #111;
+  box-shadow: 0 0 16px rgba(245, 166, 35, 0.6);
+}
+
+.float-badge:hover strong,
+.float-badge:focus-visible strong {
+  color: #ffd27a;
+}
+
+/* CLICK / PRESS */
+.float-badge:active {
+  scale: 0.97;
+  translate: 0 0;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5),
+    0 0 34px rgba(245, 166, 35, 0.7),
+    inset 0 0 14px rgba(245, 166, 35, 0.25);
 }
 
 @media (max-width: 600px) {
@@ -2839,15 +2882,14 @@ html body section#how-we-work.work-process > .work-process-wrap {
   .float-badge strong { font-size: 13px; }
   .float-badge span.fb-label { font-size: 9px; }
 
-  .float-badge.fb-1 { top: 2%;  left: -4px; }
-  .float-badge.fb-2 { top: 14%; right: -4px; }
-  .float-badge.fb-3 { top: 44%; left: -4px; }
+  .float-badge.fb-1 { top: 2%;       left: -4px; }
+  .float-badge.fb-2 { bottom: 112px; right: -4px; }
+  .float-badge.fb-3 { bottom: 112px; left: -4px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .float-badge { animation: none; }
 }
-
   </style>
 
 </head>
@@ -2921,9 +2963,7 @@ html body section#how-we-work.work-process > .work-process-wrap {
             <span class="note-dot"></span>
             Reliable teams. Measurable results. Built to scale.
           </div>
-        </div>
-
-        <div class="hero-visual" id="hero-video">
+              <div class="hero-visual" id="hero-video">
           <div class="video-frame">
             <video id="heroVideo" muted autoplay loop playsinline preload="auto" disablepictureinpicture
               disableremoteplayback controlslist="nodownload noplaybackrate noremoteplayback nofullscreen"
@@ -2931,37 +2971,37 @@ html body section#how-we-work.work-process > .work-process-wrap {
               <source src="./team-hawks-site/hero.mp4" type="video/mp4">
             </video>
           </div>
-                    <div class="float-badge fb-1">
+
+          <a class="float-badge fb-1" href="#impact" aria-label="See our client retention">
             <div class="float-badge-icon">↗</div>
             <div>
               <strong>98%</strong>
               <span class="fb-label">Retention</span>
             </div>
-          </div>
+          </a>
 
-          <div class="float-badge fb-2">
+          <a class="float-badge fb-2" href="#contact-form" aria-label="Contact our 24/7 support">
             <div class="float-badge-icon">☎</div>
             <div>
               <strong>24/7</strong>
               <span class="fb-label">Support</span>
             </div>
-          </div>
+          </a>
 
-          <div class="float-badge fb-3">
+          <a class="float-badge fb-3" href="#impact" aria-label="See projects delivered">
             <div class="float-badge-icon">◎</div>
             <div>
               <strong>150+</strong>
               <span class="fb-label">Projects Delivered</span>
             </div>
-          </div>
+          </a>
+
           <div class="people-card">
             <strong>250+</strong>
             <b>Dedicated Professionals</b>
             <span>Delivering excellence across teams and industries.</span>
           </div>
         </div>
-      </div>
-    </section>
 <!-- TRUSTED BRANDS -->
 <section class="trust" aria-label="Trusted technology brands">
   <div class="wrap">
