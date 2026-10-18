@@ -2909,6 +2909,41 @@ html body section#how-we-work.work-process > .work-process-wrap {
 @media (prefers-reduced-motion:reduce){
   .people-card{box-shadow:0 0 22px rgba(245,166,35,.28)}
 }
+    /* ===== 250+ CARD — GLOW REDUCED 80% ===== */
+.people-card{
+  border:1px solid rgba(245,166,35,.09);
+  background:linear-gradient(145deg,rgba(245,166,35,.02),rgba(6,7,8,.96) 55%);
+}
+
+.people-card::before{
+  background:linear-gradient(115deg,transparent 30%,rgba(245,166,35,.04) 50%,transparent 70%);
+}
+
+.people-card strong{
+  text-shadow:0 0 14px rgba(245,166,35,.12),0 0 34px rgba(245,166,35,.07);
+}
+
+@keyframes hk-card-glow{
+  0%,100%{
+    border-color:rgba(245,166,35,.09);
+    box-shadow:
+      0 0 14px rgba(245,166,35,.06),
+      0 0 38px rgba(245,166,35,.04),
+      inset 0 0 18px rgba(245,166,35,.02);
+  }
+  50%{
+    border-color:rgba(255,200,90,.19);
+    box-shadow:
+      0 0 22px rgba(245,166,35,.13),
+      0 0 60px rgba(245,166,35,.08),
+      0 0 110px rgba(245,166,35,.04),
+      inset 0 0 28px rgba(245,166,35,.03);
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .people-card{box-shadow:0 0 22px rgba(245,166,35,.08)}
+}
 
   </style>
 
