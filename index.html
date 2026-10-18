@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2764,6 +2763,58 @@ html body section#how-we-work.work-process > .work-process-wrap {
   display: block;
   object-fit: contain;
 }
+    /* ===== TEAM HAWKS — UPGRADE PACK ===== */
+
+/* 1. SVG icons */
+.feature-icon svg,.service-icon svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;display:block}
+.service-icon svg{width:26px;height:26px}
+
+/* 2. Muted tech logos, gold on hover */
+.trust .brand-item{opacity:.5;filter:grayscale(1)}
+.trust .brand-item .brand-symbol{color:#9a9a9a}
+.trust .brand-item:hover{opacity:1;filter:none;color:var(--gold2)}
+.trust .brand-item:hover .brand-symbol{color:var(--gold)}
+
+/* 3. Gold gradient stat numbers */
+.ti-num,.ti-num.g{background:linear-gradient(100deg,#ffe29a,#f5a623 55%,#b97e1e);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* 4. Process timeline */
+.process-number{box-shadow:0 0 0 5px rgba(245,166,35,.12),0 0 18px rgba(245,166,35,.35)}
+.process-card:not(:last-child)::after{content:"";position:absolute;top:61px;left:60px;right:0;height:2px;background:linear-gradient(90deg,var(--gold),rgba(245,166,35,.12))}
+@media(max-width:800px){.process-card::after{display:none!important}}
+
+/* 5. Stronger card hover */
+.feature-card:hover,.service-card:hover{box-shadow:0 14px 40px rgba(245,166,35,.14),0 0 0 1px rgba(245,166,35,.25)}
+
+/* 6. Scroll reveal (added by JS) */
+.rv{opacity:0;translate:0 28px;transition:opacity .8s ease,translate .8s ease,transform .35s ease,border-color .35s ease,box-shadow .35s ease}
+.rv.in{opacity:1;translate:0 0}
+#about .ti-cards .ti-card.rv{transition:opacity .8s ease,translate .8s ease,transform .4s cubic-bezier(.2,.8,.2,1),border-color .4s ease,box-shadow .4s ease,background .4s ease}
+
+/* 7. Gold gradient headline + hero glow */
+.hero h1 .gold-line{background:linear-gradient(100deg,#ffe29a,#f5a623 55%,#b97e1e);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-visual::before{content:"";position:absolute;inset:4% 0 0;z-index:1;pointer-events:none;background:radial-gradient(closest-side,rgba(245,166,35,.2),transparent 72%)}
+.hero-badge{position:absolute;z-index:5;padding:8px 14px;border-radius:50px;font-size:12px;font-weight:700;color:#fff;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:hk-float 5s ease-in-out infinite}
+.hero-badge b{color:var(--gold2)}
+.hb1{top:14%;left:2%}
+.hb2{top:36%;right:0;animation-delay:-2s}
+@keyframes hk-float{50%{transform:translateY(-12px)}}
+
+/* 8. Glass testimonials with stars */
+#about .ti-cards .ti-card{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+#about .ti-card blockquote::before{content:"★★★★★";display:block;font-style:normal;color:var(--gold2);letter-spacing:3px;font-size:14px;margin-bottom:8px}
+@media(max-width:900px){#about .ti-cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;padding-bottom:10px}#about .ti-cards .ti-card{flex:0 0 85%;scroll-snap-align:center}}
+
+/* 9. Gold focus rings + pulsing WhatsApp */
+.contact-field input:focus,.contact-field select:focus,.contact-field textarea:focus{border-color:#f5b52e;box-shadow:0 0 0 3px rgba(245,158,11,.35)}
+.wa-float{animation:hk-pulse 2.4s infinite}
+@keyframes hk-pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}70%,100%{box-shadow:0 0 0 16px rgba(37,211,102,0)}}
+
+/* 10. Blurred sticky navbar with gold line on scroll */
+.site-header{transition:background .3s,border-color .3s,box-shadow .3s}
+.site-header.scrolled{background:rgba(0,0,0,.72);border-bottom-color:var(--gold);box-shadow:0 6px 30px rgba(0,0,0,.5)}
+
+@media(prefers-reduced-motion:reduce){.hero-badge,.wa-float{animation:none!important}.rv{opacity:1!important;translate:none!important}}
 
   </style>
 
@@ -3627,6 +3678,54 @@ html body section#how-we-work.work-process > .work-process-wrap {
       counters.forEach((counter) => observer.observe(counter));
     })();
   </script>
+  <script>
+(function () {
+  /* SVG icons replace the text glyphs */
+  var P = {
+    target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+    scale: '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
+    coin: '<circle cx="12" cy="12" r="9"/><path d="M14.8 9a3 3 0 00-2.8-1.5c-1.7 0-3 .9-3 2.2 0 3 6 1.6 6 4.6 0 1.3-1.4 2.2-3 2.2A3.2 3.2 0 019 14.7M12 6v1.5M12 16.5V18"/>',
+    chip: '<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>',
+    cart: '<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.4a1 1 0 001 .8h9.2a1 1 0 001-.8L20.5 8H6"/>',
+    brief: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18"/>',
+    code: '<path d="M8 8l-5 4 5 4M16 8l5 4-5 4M14 5l-4 14"/>',
+    headset: '<path d="M4 14v-2a8 8 0 0116 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/><path d="M19 20a4 4 0 01-4 2h-2"/>',
+    files: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>',
+    users: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0M16 4.6a3.5 3.5 0 010 6.8M18 14.2A6.5 6.5 0 0121.5 20"/>'
+  };
+  function put(sel, keys) {
+    var els = document.querySelectorAll(sel);
+    keys.forEach(function (k, i) {
+      if (els[i]) els[i].innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + P[k] + '</svg>';
+    });
+  }
+  put('.feature-icon', ['target', 'scale', 'coin', 'chip', 'cart', 'brief']);
+  put('.service-icon', ['code', 'headset', 'files', 'users']);
+
+  /* floating glass badges around the hero video */
+  var hv = document.getElementById('hero-video');
+  if (hv) hv.insertAdjacentHTML('beforeend',
+    '<div class="hero-badge hb1"><b>98%</b> Retention</div><div class="hero-badge hb2"><b>24/7</b> Support</div>');
+
+  /* navbar: blur + gold line after scrolling */
+  var header = document.querySelector('.site-header');
+  function onScroll() { if (header) header.classList.toggle('scrolled', window.scrollY > 30); }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* scroll reveal */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(
+    '.section-heading,.services-head,.feature-card,.service-card,.process-card,.ti-head,.ti-card,.contact-info,.contact-form,.cta-box'
+  ).forEach(function (el) { el.classList.add('rv'); io.observe(el); });
+})();
+</script>
 
 </body>
 
