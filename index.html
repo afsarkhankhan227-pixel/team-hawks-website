@@ -2815,6 +2815,7 @@ html body section#how-we-work.work-process > .work-process-wrap {
 .site-header.scrolled{background:rgba(0,0,0,.72);border-bottom-color:var(--gold);box-shadow:0 6px 30px rgba(0,0,0,.5)}
 
 @media(prefers-reduced-motion:reduce){.hero-badge,.wa-float{animation:none!important}.rv{opacity:1!important;translate:none!important}}
+    
 
   </style>
 
@@ -3724,6 +3725,27 @@ html body section#how-we-work.work-process > .work-process-wrap {
   document.querySelectorAll(
     '.section-heading,.services-head,.feature-card,.service-card,.process-card,.ti-head,.ti-card,.contact-info,.contact-form,.cta-box'
   ).forEach(function (el) { el.classList.add('rv'); io.observe(el); });
+})();
+</script>
+  <script>
+(function () {
+  var el = document.querySelector('.people-card strong');
+  if (!el) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var target = 250, duration = 1800, start = null;
+  el.textContent = '0+';
+
+  function tick(now) {
+    if (start === null) start = now;
+    var p = Math.min((now - start) / duration, 1);
+    var eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(target * eased) + '+';
+    if (p < 1) requestAnimationFrame(tick);
+  }
+
+  // wait for your page loader to finish, then count up
+  setTimeout(function () { requestAnimationFrame(tick); }, 900);
 })();
 </script>
 
