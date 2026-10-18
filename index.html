@@ -2815,6 +2815,65 @@ html body section#how-we-work.work-process > .work-process-wrap {
 .site-header.scrolled{background:rgba(0,0,0,.72);border-bottom-color:var(--gold);box-shadow:0 6px 30px rgba(0,0,0,.5)}
 
 @media(prefers-reduced-motion:reduce){.hero-badge,.wa-float{animation:none!important}.rv{opacity:1!important;translate:none!important}}
+    /* ===== 250+ CARD — FLOAT + GOLD GLOW (complete) ===== */
+.people-card{
+  overflow:hidden;
+  isolation:isolate;
+  border:1px solid rgba(245,166,35,.45);
+  background:linear-gradient(145deg,rgba(245,166,35,.10),rgba(6,7,8,.96) 55%);
+  animation:hk-card-float 5s ease-in-out infinite, hk-card-glow 2.6s ease-in-out infinite;
+}
+
+/* light sweep across the card */
+.people-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:linear-gradient(115deg,transparent 30%,rgba(245,166,35,.18) 50%,transparent 70%);
+  transform:translateX(-130%);
+  animation:hk-card-sweep 4.5s ease-in-out infinite;
+}
+
+/* gold number with glow */
+.people-card strong{
+  color:#f5b52e;
+  text-shadow:0 0 14px rgba(245,166,35,.6),0 0 34px rgba(245,166,35,.35);
+}
+
+@keyframes hk-card-float{
+  0%,100%{translate:0 0}
+  50%{translate:0 -10px}
+}
+
+@keyframes hk-card-glow{
+  0%,100%{
+    border-color:rgba(245,166,35,.45);
+    box-shadow:
+      0 0 14px rgba(245,166,35,.30),
+      0 0 38px rgba(245,166,35,.18),
+      inset 0 0 18px rgba(245,166,35,.08);
+  }
+  50%{
+    border-color:rgba(255,200,90,.95);
+    box-shadow:
+      0 0 22px rgba(245,166,35,.65),
+      0 0 60px rgba(245,166,35,.40),
+      0 0 110px rgba(245,166,35,.18),
+      inset 0 0 28px rgba(245,166,35,.16);
+  }
+}
+
+@keyframes hk-card-sweep{
+  0%,55%{transform:translateX(-130%)}
+  100%{transform:translateX(130%)}
+}
+
+/* static gold glow if the visitor has reduced motion on */
+@media (prefers-reduced-motion:reduce){
+  .people-card{box-shadow:0 0 22px rgba(245,166,35,.4)}
+}
     
 
   </style>
