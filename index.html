@@ -2955,7 +2955,138 @@ html body section#how-we-work.work-process > .work-process-wrap {
 .footer-logo {
   filter: brightness(1.3) contrast(1.08) saturate(1.12);
 }
+/* =====================================================
+   TEAM HAWKS — SERVICE + INDUSTRY CARD MICRO-INTERACTIONS
+   Glowing gold border, soft scale, shadow lift
+===================================================== */
 
+/* Glowing gold border ring (hidden until hover/focus).
+   --mx / --my are set by JS so the glow follows the cursor. */
+.service-card::after,
+#industries .feature-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 0%),
+      #ffd27a 0%,
+      rgba(245, 166, 35, .75) 35%,
+      rgba(245, 166, 35, .18) 70%,
+      transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  transition: opacity .4s ease;
+}
+
+/* Hover + keyboard focus: lift, subtle scale, layered gold shadow */
+.service-card:hover,
+.service-card:focus-within,
+#industries .feature-card:hover {
+  transform: translateY(-8px) scale(1.015);
+  border-color: rgba(245, 166, 35, .35);
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, .55),
+    0 0 0 1px rgba(245, 166, 35, .18),
+    0 0 34px rgba(245, 166, 35, .16);
+}
+
+.service-card:hover::after,
+.service-card:focus-within::after,
+#industries .feature-card:hover::after {
+  opacity: 1;
+}
+
+/* Icons: glow + pop */
+.service-icon,
+#industries .feature-icon {
+  transition: transform .35s ease, color .35s ease, border-color .35s ease,
+    background .35s ease, box-shadow .35s ease, filter .35s ease;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.14) translateY(-2px);
+  color: #ffc15b;
+  filter: drop-shadow(0 0 10px rgba(245, 166, 35, .55));
+}
+
+#industries .feature-card:hover .feature-icon {
+  transform: scale(1.08) translateY(-2px);
+  color: #ffc15b;
+  border-color: rgba(245, 166, 35, .75);
+  background: rgba(245, 166, 35, .15);
+  box-shadow: 0 0 24px rgba(245, 166, 35, .3);
+}
+
+/* Titles and small details react too */
+.service-card h3,
+#industries .feature-card h3 {
+  transition: color .3s ease;
+}
+
+.service-card:hover h3,
+#industries .feature-card:hover h3 {
+  color: #ffd27a;
+}
+
+.service-number {
+  transition: letter-spacing .35s ease;
+}
+
+.service-card:hover .service-number {
+  letter-spacing: 2.8px;
+}
+
+/* Arrow nudges up and right */
+.service-arrow {
+  transition: transform .3s ease, text-shadow .3s ease;
+}
+
+.service-card:hover .service-arrow,
+.service-arrow:focus-visible {
+  transform: translate(5px, -5px);
+  text-shadow: 0 0 14px rgba(245, 166, 35, .7);
+}
+
+/* Touch devices: no sticky hover states */
+@media (hover: none) {
+
+  .service-card:hover,
+  #industries .feature-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .service-card:hover .service-icon,
+  #industries .feature-card:hover .feature-icon,
+  .service-card:hover .service-arrow {
+    transform: none;
+  }
+
+  .service-card::after,
+  #industries .feature-card::after {
+    display: none;
+  }
+}
+
+/* Reduced motion: keep the glow, drop the movement */
+@media (prefers-reduced-motion: reduce) {
+
+  .service-card:hover,
+  .service-card:focus-within,
+  #industries .feature-card:hover,
+  .service-card:hover .service-icon,
+  #industries .feature-card:hover .feature-icon,
+  .service-card:hover .service-arrow,
+  .service-card:hover .service-number {
+    transform: none !important;
+    letter-spacing: normal;
+  }
+}
 
   </style>
 
@@ -3888,7 +4019,20 @@ html body section#how-we-work.work-process > .work-process-wrap {
   setTimeout(function () { requestAnimationFrame(tick); }, 900);
 })();
 </script>
+<script>
+  /* Cursor-following border glow for service + industry cards */
+  (function () {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
+    document.querySelectorAll('.service-card, #industries .feature-card').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+  })();
+</script>
 </body>
 
 </html>
