@@ -3225,6 +3225,25 @@ html body section#how-we-work.work-process > .work-process-wrap {
 .people-card {
   background: linear-gradient(150deg, #2b2d31, #1f2124);
 }
+    /* CTA BOX — CENTER THE TEXT + BUTTON */
+@media (min-width: 901px) {
+  .cta-box {
+    display: block;
+    padding: 34px 220px; /* dono side barabar jagah, eagle ke liye left mein room */
+  }
+
+  .cta-box .eagle-mark {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+  }
+
+  .cta-content {
+    transform: none; /* purana left shift hata diya */
+  }
+}
   </style>
 
 </head>
