@@ -3087,7 +3087,97 @@ html body section#how-we-work.work-process > .work-process-wrap {
     letter-spacing: normal;
   }
 }
+    
+/* TEAM HAWKS — REDUCE SIDE SPACING */
+.wrap {
+  width: calc(100% - 48px);
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+/* MAKE HEADER LOGO BIGGER */
+.site-header .header-logo {
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+/* GIVE THE HEADER ENOUGH ROOM FOR THE LARGER LOGO */
+.nav-inner {
+  min-height: 96px;
+  gap: 20px;
+}
+
+/* RESPONSIVE SPACING */
+@media (max-width: 600px) {
+  .wrap {
+    width: calc(100% - 28px);
+  }
+
+  .nav-inner {
+    min-height: 76px;
+  }
+
+  .site-header .header-logo {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* SERVICE CARDS — GRAY */
+.service-card {
+  background: linear-gradient(150deg, #2b2d31, #1f2124);
+  border-color: #3b3e44;
+}
+
+.service-card p {
+  color: #c4c8ce; /* gray background par text clear dikhe */
+}
+    /* HERO NOTE — BIGGER TEXT */
+.hero-note {
+  font-size: 15px;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.hero-note .note-dot {
+  width: 9px;
+  height: 9px;
+}
+
+@media (max-width: 600px) {
+  .hero-note {
+    font-size: 13.5px;
+  }
+}
+    /* TRUSTED BRANDS — REAL COLORS (logo + name) */
+.trust .brand-item { opacity: 1; filter: none; }
+.trust .brand-item .brand-symbol { color: inherit; }
+.brand-symbol svg { width: 1em; height: 1em; display: block; }
+
+.trust .brand-group .brand-item:nth-child(1)  { color: #9aca68; } /* shopify */
+.trust .brand-group .brand-item:nth-child(2)  { color: #d6a4ff; } /* slack */
+.trust .brand-group .brand-item:nth-child(3)  { color: #6f8cff; } /* AI */
+.trust .brand-group .brand-item:nth-child(4)  { color: #65a5f5; } /* WordPress */
+.trust .brand-group .brand-item:nth-child(5)  { color: #ffd43b; } /* python */
+.trust .brand-group .brand-item:nth-child(6)  { color: #6cc24a; } /* node */
+.trust .brand-group .brand-item:nth-child(7)  { color: #3fae7a; } /* django */
+.trust .brand-group .brand-item:nth-child(8)  { color: #8b7bff; } /* stripe */
+.trust .brand-group .brand-item:nth-child(9)  { color: #65a5f5; } /* INTERCOM */
+.trust .brand-group .brand-item:nth-child(10) { color: #22a8e0; } /* salesforce */
+.trust .brand-group .brand-item:nth-child(11) { color: #d2d3d6; } /* zendesk */
+.trust .brand-group .brand-item:nth-child(12) { color: #ff6a3d; } /* zapier */
+.trust .brand-group .brand-item:nth-child(13) { color: #f06a6a; } /* asana */
+.trust .brand-group .brand-item:nth-child(14) { color: #ea4335; } /* Gmail */
+.trust .brand-group .brand-item:nth-child(15) { color: #4a7dff; } /* instantly */
+.trust .brand-group .brand-item:nth-child(16) { color: #f89820; } /* Java */
+.trust .brand-group .brand-item:nth-child(17) { color: #ff7a59; } /* HubSpot */
+.trust .brand-group .brand-item:nth-child(18) { color: #2f8fe0; } /* LinkedIn */
+.trust .brand-group .brand-item:nth-child(19) { color: #f5f5f4; } /* Notion */
+.trust .brand-group .brand-item:nth-child(20) { color: #f58220; } /* RingCentral */
+.trust .brand-group .brand-item:nth-child(21) { color: #ff3d57; } /* monday */
   </style>
 
 </head>
@@ -3142,6 +3232,7 @@ html body section#how-we-work.work-process > .work-process-wrap {
   <main>
     <!-- HERO -->
     <section class="hero" id="home">
+      
       <div class="hero-overlay"></div>
       <div class="wrap hero-grid">
         <div class="hero-content">
@@ -3196,12 +3287,12 @@ html body section#how-we-work.work-process > .work-process-wrap {
           <div class="brand-item"><span class="brand-symbol"><img src="https://cdn.simpleicons.org/django/3fae7a" alt="" data-fb="dj"></span>django</div>
           <div class="brand-item"><span class="brand-symbol"><img src="https://cdn.simpleicons.org/stripe/8b7bff" alt="" data-fb="S"></span>stripe</div>
           <div class="brand-item"><span class="brand-symbol"><img src="https://cdn.simpleicons.org/intercom/65a5f5" alt="" data-fb="▥"></span>INTERCOM</div>
-          <div class="brand-item"><span class="brand-symbol"><img src="https://cdn.simpleicons.org/salesforce/22a8e0" alt="" data-fb="☁"></span>salesforce</div>
+         <div class="brand-item"><span class="brand-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#22a8e0" d="M10 5.2a4.3 4.3 0 0 1 3.4 1.7 3.7 3.7 0 0 1 1.7-.4 3.8 3.8 0 0 1 3.7 3 3.3 3.3 0 0 1-.6 6.5H7.3a3.8 3.8 0 0 1-.9-7.5A4.3 4.3 0 0 1 10 5.2z"/></svg></span>salesforce</div>
           <div class="brand-item"><span class="brand-symbol"><img src="https://cdn.simpleicons.org/zendesk/d2d3d6" alt="" data-fb="Z"></span>zendesk</div>
           <div class="brand-item"><span class="brand-symbol"><img src="https://cdn.simpleicons.org/zapier/ff6a3d" alt="" data-fb="✳"></span>zapier</div>
           <div class="brand-item"><span class="brand-symbol"><img src="https://cdn.simpleicons.org/asana/f06a6a" alt="" data-fb="●"></span>asana</div>
           <div class="brand-item"><span class="brand-symbol"><img src="https://cdn.simpleicons.org/gmail/ea4335" alt="" data-fb="M"></span>Gmail</div>
-          <div class="brand-item"><span class="brand-symbol"><img src="https://cdn.simpleicons.org/instantly/4a7dff" alt="" data-fb="⚡"></span>instantly</div>
+         <div class="brand-item"><span class="brand-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#4a7dff"/><path fill="#fff" d="M13.5 3 6 13.5h5L10 21l8-11h-5z"/></svg></span>instantly</div>
           <div class="brand-item"><span class="brand-symbol"><img src="https://cdn.simpleicons.org/openjdk/f89820" alt="" data-fb="♨"></span>Java</div>
           <div class="brand-item"><span class="brand-symbol"><img src="https://cdn.simpleicons.org/hubspot/ff7a59" alt="" data-fb="◎"></span>HubSpot</div>
           <div class="brand-item"><span class="brand-symbol"><img src="https://cdn.simpleicons.org/linkedin/0a66c2" alt="" data-fb="in"></span>LinkedIn</div>
@@ -3974,10 +4065,6 @@ html body section#how-we-work.work-process > .work-process-wrap {
   put('.feature-icon', ['target', 'scale', 'coin', 'chip', 'cart', 'brief']);
   put('.service-icon', ['code', 'headset', 'files', 'users']);
 
-  /* floating glass badges around the hero video */
-  var hv = document.getElementById('hero-video');
-  if (hv) hv.insertAdjacentHTML('beforeend',
-    '<div class="hero-badge hb1"><b>98%</b> Retention</div><div class="hero-badge hb2"><b>24/7</b> Support</div>');
 
   /* navbar: blur + gold line after scrolling */
   var header = document.querySelector('.site-header');
