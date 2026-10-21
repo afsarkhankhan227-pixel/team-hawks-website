@@ -3220,26 +3220,45 @@ html body section#how-we-work.work-process > .work-process-wrap {
 .people-card {
   background: linear-gradient(150deg, #2b2d31, #1f2124);
 }
-  /* CTA BOX — LOGO + TEXT CLOSE TOGETHER */
+ /* CTA BOX: balanced alignment */
 @media (min-width: 901px) {
   .cta-box {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto minmax(0, 640px);
     align-items: center;
     justify-content: center;
-    gap: 28px;              /* logo aur text ke darmiyan gap, chahiye to 10-40px kar lo */
-    padding: 34px 40px;
+    column-gap: 56px;
+    padding: 56px 40px;
   }
 
   .cta-box .eagle-mark {
-    position: static;       /* absolute hata diya */
+    position: static;
     transform: none;
     margin: 0;
-    flex-shrink: 0;
+    width: 200px;            /* thora bada, taake text ke barabar weight aaye */
+    max-width: none;
+    justify-self: center;
+    align-self: center;
+    mix-blend-mode: screen;  /* dark square hide */
   }
 
   .cta-content {
     transform: none;
     text-align: center;
+    width: 100%;
+  }
+
+  .cta-title {
+    font-size: clamp(30px, 3.2vw, 42px);
+    line-height: 1.2;
+  }
+
+  .cta-text {
+    margin-top: 14px;
+  }
+
+  .cta-row {
+    margin-top: 28px;
   }
 }
     /* HEADER ON SCROLL: transparent yellowish-gray */
