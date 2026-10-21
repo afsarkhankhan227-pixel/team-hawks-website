@@ -2575,20 +2575,15 @@ img.footer-logo {
 .process-timeline::before {
   content: "";
   position: absolute;
-  top: 27px;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    #e8b04a,
-    #e8b04a,
-    transparent
-  );
-  opacity: 0.55;
+  top: 26px;                    /* circle ke center par (54px / 2) */
+  left: 27px;                   /* 01 circle ke center se start */
+  right: calc(25% - 43.5px);    /* 04 circle ke center par end */
+  height: 2px;
+  background: linear-gradient(90deg,
+      rgba(232, 176, 74, .9),
+      rgba(232, 176, 74, .45));
+  opacity: 1;
 }
-
 .process-step {
   position: relative;
   min-width: 0;
@@ -3225,23 +3220,53 @@ html body section#how-we-work.work-process > .work-process-wrap {
 .people-card {
   background: linear-gradient(150deg, #2b2d31, #1f2124);
 }
-    /* CTA BOX — CENTER THE TEXT + BUTTON */
+  /* CTA BOX — LOGO + TEXT CLOSE TOGETHER */
 @media (min-width: 901px) {
   .cta-box {
-    display: block;
-    padding: 34px 220px; /* dono side barabar jagah, eagle ke liye left mein room */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;              /* logo aur text ke darmiyan gap, chahiye to 10-40px kar lo */
+    padding: 34px 40px;
   }
 
   .cta-box .eagle-mark {
-    position: absolute;
-    left: 40px;
-    top: 50%;
-    transform: translateY(-50%);
+    position: static;       /* absolute hata diya */
+    transform: none;
     margin: 0;
+    flex-shrink: 0;
   }
 
   .cta-content {
-    transform: none; /* purana left shift hata diya */
+    transform: none;
+    text-align: center;
+  }
+}
+    /* HEADER ON SCROLL: transparent yellowish-gray */
+.site-header.scrolled {
+  background: linear-gradient(180deg,
+      rgba(42, 35, 20, .92),
+      rgba(26, 23, 16, .88));
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+  backdrop-filter: blur(22px) saturate(1.2);
+  border-bottom-color: rgba(245, 166, 35, .8);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, .5),
+              0 1px 0 rgba(245, 166, 35, .15);
+}
+    /* TRUSTED BRANDS HEADING: bigger + bolder */
+.trust-heading {
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 3.5px;
+  margin-bottom: 30px;
+  color: #e8b04a;           /* thora brighter gold, taake zyada clear dikhe */
+}
+
+@media (max-width: 600px) {
+  .trust-heading {
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
   }
 }
   </style>
