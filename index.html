@@ -3220,25 +3220,25 @@ html body section#how-we-work.work-process > .work-process-wrap {
 .people-card {
   background: linear-gradient(150deg, #2b2d31, #1f2124);
 }
-/* CTA BOX: compact + balanced alignment */
+/* CTA BOX: logo close to text + slightly raised */
 @media (min-width: 901px) {
   .cta-box {
     display: grid;
     grid-template-columns: auto minmax(0, 640px);
     align-items: center;
     justify-content: center;
-    column-gap: 36px;
-    padding: 34px 40px;      /* pehle jaisa original padding */
+    column-gap: 4px;          /* logo bilkul text ke saath (pehle 36px) */
+    padding: 34px 40px;
   }
 
   .cta-box .eagle-mark {
     position: static;
-    transform: none;
     margin: 0;
-    width: 150px;            /* pehle jaisa size (160px ke kareeb) */
+    width: 150px;
     max-width: none;
-    justify-self: center;
+    justify-self: end;        /* logo text ki taraf chipak jaye */
     align-self: center;
+    transform: translateY(-18px);   /* y axis par upar, chahiye to -10px se -30px tak karo */
     mix-blend-mode: screen;
   }
 
@@ -3249,16 +3249,16 @@ html body section#how-we-work.work-process > .work-process-wrap {
   }
 
   .cta-title {
-    font-size: clamp(28px, 3.6vw, 42px);  /* original size */
+    font-size: clamp(28px, 3.6vw, 42px);
     line-height: 1.2;
   }
 
   .cta-text {
-    margin-top: 10px;        /* original */
+    margin-top: 10px;
   }
 
   .cta-row {
-    margin-top: 26px;        /* original */
+    margin-top: 26px;
   }
 }
     /* HEADER ON SCROLL: transparent yellowish-gray */
