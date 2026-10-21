@@ -3288,6 +3288,76 @@ html body section#how-we-work.work-process > .work-process-wrap {
     margin-bottom: 24px;
   }
 }
+    /* ===== HK DASHBOARD SHOWCASE + GLOBE ===== */
+.hk-stage{perspective:1500px;position:relative;max-width:1040px;margin:46px auto 0;padding:30px 0 40px}
+.hk-panel{position:relative;display:grid;grid-template-columns:190px 280px 1fr 220px;min-height:470px;border-radius:20px;border:1px solid rgba(245,166,35,.25);background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));backdrop-filter:blur(14px);box-shadow:0 40px 90px rgba(0,0,0,.8),0 0 70px rgba(245,166,35,.12);transform-style:preserve-3d;transform:rotateY(var(--ry,-11deg)) rotateX(var(--rx,5deg));transition:transform .25s ease-out}
+.hk-panel>div{padding:18px;min-width:0}
+.hk-side,.hk-list,.hk-chat{border-right:1px solid rgba(245,166,35,.22)}
+.hk-dbrand{font-weight:700;display:flex;gap:8px;align-items:center;margin-bottom:20px;font-size:14px}
+.hk-dbrand i{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,#f5a623,#a8741a)}
+.hk-sl{font-size:12px;color:var(--muted);margin:16px 0 8px}
+.hk-nav{padding:8px 10px;border-radius:9px;font-size:13px;color:#d8d0bd;display:flex;justify-content:space-between}
+.hk-nav.on{background:rgba(245,166,35,.12);color:#fff}
+.hk-nav em{font-style:normal;background:#f5a623;color:#000;border-radius:99px;font-size:11px;font-weight:700;padding:0 7px}
+.hk-panel h4{margin:0 0 14px;font-size:15px}
+.hk-item{padding:11px;border-radius:12px;margin-bottom:8px;border:1px solid transparent;font-size:12px}
+.hk-item b{display:flex;justify-content:space-between;font-size:13px}
+.hk-item b small{color:var(--muted);font-weight:400}
+.hk-item p{margin:2px 0 7px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hk-item.hk-act{border-color:#f5a623;background:rgba(245,166,35,.09);box-shadow:0 0 24px rgba(245,166,35,.22)}
+.hk-tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 10px;border-radius:99px;border:1px solid}
+.hk-t-hot{color:#ff9a4a;border-color:#ff9a4a;background:rgba(255,120,40,.1)}
+.hk-t-q{color:#ffd27a;border-color:#f5a623;background:rgba(245,166,35,.12)}
+.hk-t-f{color:#f6e27a;border-color:#c9b13c;background:rgba(246,226,122,.08)}
+.hk-t-n{color:#e8d3a2;border-color:#9b8a5c;background:rgba(255,255,255,.05)}
+.hk-chat{display:flex;flex-direction:column}
+.hk-msgs{flex:1;display:flex;flex-direction:column;gap:10px;justify-content:flex-end;overflow:hidden;min-height:300px}
+.hk-m{max-width:82%;padding:10px 13px;border-radius:14px;font-size:13px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);animation:hk-pop .4s ease-out both}
+.hk-m.me{align-self:flex-end;background:rgba(245,166,35,.16);border-color:rgba(245,166,35,.25)}
+.hk-m small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.hk-typing{align-self:flex-start;display:flex;gap:4px}
+.hk-typing span{width:6px;height:6px;border-radius:50%;background:#f5a623;animation:hk-blink 1s infinite}
+.hk-typing span:nth-child(2){animation-delay:.15s}.hk-typing span:nth-child(3){animation-delay:.3s}
+.hk-field{margin-top:12px;padding:10px 13px;border-radius:12px;border:1px solid rgba(245,166,35,.22);color:var(--muted);font-size:13px}
+.hk-score{display:flex;gap:14px;align-items:center;margin-bottom:16px;font-size:12px;color:var(--muted)}
+.hk-ring{position:relative;width:92px;height:92px;flex:none}
+.hk-ring svg{transform:rotate(-90deg)}
+.hk-ring circle{fill:none;stroke-width:8}
+.hk-ring .bg{stroke:rgba(255,255,255,.09)}
+.hk-ring .fg{stroke:#f5a623;stroke-linecap:round;stroke-dasharray:264;stroke-dashoffset:264;transition:stroke-dashoffset 2s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 0 6px rgba(245,166,35,.7))}
+.hk-ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:26px}
+.hk-ins p{font-size:12px;color:var(--muted);margin:0 0 4px}
+.hk-bar{height:6px;border-radius:9px;background:rgba(255,255,255,.08);margin:6px 0 14px;overflow:hidden}
+.hk-bar i{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,#a8741a,#ffd27a);transition:width 2s ease-out}
+.hk-float{position:absolute;z-index:3;display:flex;gap:10px;align-items:center;padding:11px 15px;border-radius:14px;font-size:13px;background:rgba(18,14,6,.78);backdrop-filter:blur(12px);border:1px solid rgba(245,166,35,.25);box-shadow:0 14px 40px rgba(0,0,0,.65),0 0 26px rgba(245,166,35,.22);transform:translateZ(var(--z,70px));animation:hk-bob 5s ease-in-out infinite;animation-delay:var(--d,0s)}
+.hk-float b{display:block}.hk-float small{color:var(--muted)}
+.hk-float .dot{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:rgba(245,166,35,.18);color:#ffd27a;font-weight:700;flex:none}
+.hk-f1{top:-8px;left:14%;--z:90px}.hk-f2{bottom:6px;left:30%;--z:110px;--d:-1.6s}
+.hk-f3{top:42%;right:-26px;--z:80px;--d:-3s}.hk-f4{top:20px;right:12%;--z:60px;--d:-2.2s}
+@keyframes hk-bob{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@keyframes hk-pop{from{opacity:0;transform:translateY(10px) scale(.96)}}
+@keyframes hk-blink{50%{opacity:.25}}
+
+.hk-reach{display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center;margin-top:70px;padding-bottom:70px}
+.hk-reach h3{font-family:'Playfair Display',Georgia,serif;font-size:clamp(26px,3.2vw,36px);font-weight:600;margin:0 0 14px;color:#fff}
+.hk-reach p{color:#b9bdc4;font-size:14px;line-height:1.8;max-width:480px}
+.hk-offices{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.hk-offices span{padding:14px 18px;border-radius:12px;background:#1b1b1d;border:1px solid rgba(255,255,255,.07);font-size:13px;color:#d5d8df}
+.hk-offices b{display:block;color:#ffd27a;font-size:15px}
+.hk-globebox{position:relative;aspect-ratio:1/1;width:100%;max-width:520px;margin:0 auto}
+.hk-globebox canvas{width:100%;height:100%;display:block}
+.hk-globebox::after{content:"";position:absolute;left:18%;right:18%;bottom:2%;height:16px;border-radius:50%;background:radial-gradient(closest-side,rgba(245,166,35,.55),transparent);filter:blur(4px)}
+
+@media(max-width:980px){
+ .hk-panel{grid-template-columns:1fr 1.3fr;transform:rotateY(-5deg) rotateX(3deg)}
+ .hk-side,.hk-ins{display:none}.hk-chat{border-right:0}
+ .hk-reach{grid-template-columns:1fr}.hk-f3{right:-6px}
+}
+@media(max-width:620px){
+ .hk-panel{grid-template-columns:1fr}.hk-list{display:none}.hk-chat{border-right:0}
+ .hk-float{font-size:11px;padding:8px 11px}.hk-f1{left:2%}.hk-f2{left:8%}.hk-f4{display:none}
+}
+@media(prefers-reduced-motion:reduce){.hk-float{animation:none}}
   </style>
 
 </head>
@@ -3521,6 +3591,56 @@ html body section#how-we-work.work-process > .work-process-wrap {
         </div>
       </div>
     </section>
+        <!-- SHOWCASE: UNIFIED INBOX DASHBOARD -->
+    <section class="section" id="showcase">
+      <div class="wrap">
+        <div class="section-heading" style="text-align:center">
+          <div class="eyebrow">Your Operations, In Motion</div>
+          <h2 class="section-title">Every Lead and Conversation, <span class="gold">Handled in One Place</span></h2>
+          <p class="section-copy" style="margin-inline:auto">Our teams work inside your inbox, CRM and chat tools, so nothing waits and every hot lead gets a reply.</p>
+        </div>
+        <div class="hk-stage" id="hkStage">
+          <div class="hk-float hk-f1"><span class="dot">!</span><div><b>New hot lead</b><small>Pricing question from Customer #42</small></div></div>
+          <div class="hk-float hk-f4"><span class="dot">✓</span><div><b>Lead qualified</b><small>Sarah M. moved to Qualified</small></div></div>
+          <div class="hk-float hk-f3"><span class="dot">✔</span><div><b>Ticket resolved</b><small>Customer #88 · closed</small></div></div>
+          <div class="hk-float hk-f2"><span class="dot">✉</span><div><b>Follow-up sent</b><small>Lead #117 · meeting confirmed</small></div></div>
+
+          <div class="hk-panel" id="hkPanel">
+            <div class="hk-side">
+              <div class="hk-dbrand"><i></i>Unified Inbox</div>
+              <div class="hk-sl">Channels</div>
+              <div class="hk-nav on">Email <em>3</em></div>
+              <div class="hk-nav">Slack <em>2</em></div>
+              <div class="hk-nav">WhatsApp <em>1</em></div>
+              <div class="hk-nav">Live chat</div>
+              <div class="hk-nav">CRM</div>
+              <div class="hk-sl">Workspace</div>
+              <div class="hk-nav">Analytics</div>
+              <div class="hk-nav">Settings</div>
+            </div>
+            <div class="hk-list">
+              <h4>Inbox</h4>
+              <div class="hk-item"><b>Customer #42 <small>1:20 am</small></b><p>Is there a pricing plan for teams?</p><span class="hk-tag hk-t-hot">Hot lead</span></div>
+              <div class="hk-item hk-act"><b>Sarah M. <small>1:30 am</small></b><p>Does this connect with our CRM?</p><span class="hk-tag hk-t-q">Qualified</span></div>
+              <div class="hk-item"><b>Lead #117 <small>1:30 am</small></b><p>Can we confirm the meeting?</p><span class="hk-tag hk-t-f">Follow-up</span></div>
+              <div class="hk-item"><b>John D. <small>1:45 am</small></b><p>New inquiry about onboarding</p><span class="hk-tag hk-t-n">New inquiry</span></div>
+            </div>
+            <div class="hk-chat">
+              <h4>Sarah M.</h4>
+              <div class="hk-msgs" id="hkMsgs"></div>
+              <div class="hk-field">Type a message…</div>
+            </div>
+            <div class="hk-ins">
+              <h4>Lead insights</h4>
+              <div class="hk-score"><div class="hk-ring"><svg width="92" height="92" viewBox="0 0 92 92"><circle class="bg" cx="46" cy="46" r="42"/><circle class="fg" id="hkFg" cx="46" cy="46" r="42"/></svg><b id="hkNum">0</b></div><span>Lead score<br>High intent</span></div>
+              <p>Interest in integrations</p><div class="hk-bar"><i data-w="88"></i></div>
+              <p>Budget fit</p><div class="hk-bar"><i data-w="74"></i></div>
+              <p>Reply speed</p><div class="hk-bar"><i data-w="95"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- INDUSTRIES -->
     <section class="section" id="industries">
@@ -3609,6 +3729,17 @@ html body section#how-we-work.work-process > .work-process-wrap {
             <div class="ti-label">Avg Cost Savings</div>
             <div class="ti-desc">Strategic outsourcing<br>without compromise</div>
           </div>
+        </div>
+                <div class="hk-reach">
+          <div>
+            <h3>Global Support, Local Care</h3>
+            <p>From our offices in Pakistan and London, Team Hawks supports businesses across regions and time zones with teams you can rely on.</p>
+            <div class="hk-offices">
+              <span><b>Pakistan</b>+92 345 6115222</span>
+              <span><b>London</b>+44 7599 681179</span>
+            </div>
+          </div>
+          <div class="hk-globebox"><canvas id="hkGlobe" role="img" aria-label="Rotating globe with connections between Pakistan, London and other regions"></canvas></div>
         </div>
       </div>
     </section>
@@ -4229,6 +4360,89 @@ html body section#how-we-work.work-process > .work-process-wrap {
       });
     });
   })();
+</script>
+  <script>
+(function(){
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,D=Math.PI/180;
+
+/* dashboard tilt */
+var stage=document.getElementById('hkStage'),panel=document.getElementById('hkPanel');
+if(stage&&!reduce){
+ stage.addEventListener('mousemove',function(e){var r=stage.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;panel.style.setProperty('--ry',(-11+x*10)+'deg');panel.style.setProperty('--rx',(5-y*8)+'deg')});
+ stage.addEventListener('mouseleave',function(){panel.style.setProperty('--ry','-11deg');panel.style.setProperty('--rx','5deg')});
+}
+
+/* chat typing loop */
+var script=[['Hello, does this connect with our CRM?',1,'1:30 am'],['Yes. We work inside your inbox and CRM tools.',0,'1:31 am'],['Great. Can we book a call tomorrow?',1,'1:32 am'],['Booked for 10:00. A confirmation is on its way.',0,'1:32 am']];
+var box=document.getElementById('hkMsgs'),running=false,vis=false;
+function add(t,me,time){var d=document.createElement('div');d.className='hk-m'+(me?' me':'');d.innerHTML=t+'<small>'+time+'</small>';box.appendChild(d);while(box.children.length>4)box.removeChild(box.firstChild)}
+function typing(on){var o=box.querySelector('.hk-typing');if(o)o.remove();if(on){var d=document.createElement('div');d.className='hk-m hk-typing';d.innerHTML='<span></span><span></span><span></span>';box.appendChild(d)}}
+function play(){if(running)return;running=true;box.innerHTML='';var t=300;
+ script.forEach(function(s){setTimeout(function(){typing(true)},t);t+=1100;setTimeout(function(){typing(false);add(s[0],s[1],s[2])},t);t+=1300});
+ setTimeout(function(){running=false;if(vis)play()},t+2500)}
+if(box&&reduce)script.forEach(function(s){add(s[0],s[1],s[2])});
+
+function count(el,to,ms){var s=null;function f(ts){if(!s)s=ts;var p=Math.min((ts-s)/ms,1);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+if(stage&&'IntersectionObserver' in window){
+ new IntersectionObserver(function(es){es.forEach(function(e){
+  vis=e.isIntersecting;
+  if(e.isIntersecting&&!stage.dataset.done){stage.dataset.done=1;
+   document.getElementById('hkFg').style.strokeDashoffset=264*(1-.92);
+   count(document.getElementById('hkNum'),92,2000);
+   stage.querySelectorAll('.hk-bar i').forEach(function(b){b.style.width=b.dataset.w+'%'})}
+  if(e.isIntersecting&&!reduce)play();
+ })},{threshold:.35}).observe(stage);
+}
+
+/* globe */
+var cv=document.getElementById('hkGlobe');if(!cv)return;
+var land={
+ na:[[-168,66],[-140,70],[-95,72],[-65,60],[-55,48],[-75,38],[-81,25],[-97,22],[-88,16],[-78,8],[-86,11],[-95,16],[-105,20],[-117,32],[-124,42],[-125,50],[-140,60]],
+ sa:[[-78,8],[-60,10],[-50,0],[-35,-6],[-40,-22],[-58,-38],[-66,-55],[-73,-50],[-71,-30],[-81,-5]],
+ eu:[[-10,36],[-9,43],[-2,48],[5,52],[10,58],[20,70],[30,70],[40,62],[40,50],[28,41],[22,37],[12,38],[3,43]],
+ uk:[[-5,50],[2,52],[-3,58],[-6,56]],
+ af:[[-17,21],[-6,36],[10,37],[32,31],[43,12],[51,12],[40,-5],[40,-15],[33,-27],[20,-35],[12,-18],[9,4],[-8,4],[-17,14]],
+ as:[[40,50],[40,62],[30,70],[100,78],[180,68],[170,60],[140,52],[142,45],[130,35],[122,30],[120,22],[108,18],[105,10],[100,2],[98,15],[92,22],[80,14],[77,8],[72,20],[66,25],[57,26],[50,30],[56,24],[58,20],[44,12],[35,28],[36,36],[28,41]],
+ au:[[114,-22],[130,-12],[142,-11],[153,-26],[147,-38],[135,-35],[115,-34]]
+};
+function inside(p,poly){var x=p[0],y=p[1],c=false;for(var i=0,j=poly.length-1;i<poly.length;j=i++){var a=poly[i],b=poly[j];if((a[1]>y)!=(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])c=!c}return c}
+function vec(lon,lat){return[Math.cos(lat*D)*Math.cos(lon*D),Math.cos(lat*D)*Math.sin(lon*D),Math.sin(lat*D)]}
+var dots=[];
+for(var lat=-58;lat<=78;lat+=3){var step=3/Math.max(Math.cos(lat*D),.2);for(var lon=-180;lon<180;lon+=step){for(var k in land){if(inside([lon,lat],land[k])){dots.push(vec(lon,lat));break}}}}
+var cities={pak:{n:'Pakistan',v:vec(69,30)},lon:{n:'London',v:vec(-0.12,51.5)},dxb:{v:vec(55.3,25.2)},nyc:{v:vec(-74,40.7)},sgp:{v:vec(103.8,1.35)},syd:{v:vec(151.2,-33.9)},sfo:{v:vec(-122.4,37.8)},jnb:{v:vec(28,-26)}};
+var routes=[['pak','lon'],['pak','dxb'],['lon','nyc'],['pak','sgp'],['sgp','syd'],['nyc','sfo'],['lon','jnb'],['pak','nyc']];
+function slerp(a,b,t){var d=Math.max(-1,Math.min(1,a[0]*b[0]+a[1]*b[1]+a[2]*b[2])),om=Math.acos(d),s=Math.sin(om)||1,w1=Math.sin((1-t)*om)/s,w2=Math.sin(t*om)/s;return[a[0]*w1+b[0]*w2,a[1]*w1+b[1]*w2,a[2]*w1+b[2]*w2]}
+var cx=cv.getContext('2d'),W,H,R,rot=.7,tilt=.38,t0=performance.now(),run=true;
+function size(){var r=cv.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);W=cv.width=r.width*dpr;H=cv.height=r.height*dpr;R=W*.36}
+size();addEventListener('resize',size);
+function P(v,s){s=s||1;var c=Math.cos(rot),n=Math.sin(rot),X=v[0]*c+v[1]*n,Y=-v[0]*n+v[1]*c,Z=v[2],ct=Math.cos(tilt),st=Math.sin(tilt);return{x:W/2+Y*s*R,y:H/2-(Z*ct-X*st)*s*R,d:(X*ct+Z*st)*s}}
+function frame(now){
+ if(run&&!reduce)rot+=.0035;
+ cx.clearRect(0,0,W,H);
+ var g=cx.createRadialGradient(W/2-R*.3,H/2-R*.35,R*.1,W/2,H/2,R*1.05);g.addColorStop(0,'rgba(120,80,10,.55)');g.addColorStop(.7,'rgba(30,20,4,.75)');g.addColorStop(1,'rgba(6,4,0,.9)');
+ cx.beginPath();cx.arc(W/2,H/2,R,0,7);cx.fillStyle=g;cx.fill();
+ cx.lineWidth=W*.004;cx.strokeStyle='rgba(245,166,35,.55)';cx.shadowColor='rgba(245,166,35,.8)';cx.shadowBlur=W*.03;cx.stroke();cx.shadowBlur=0;
+ var dr=W*.0034;
+ for(var i=0;i<dots.length;i++){var p=P(dots[i]);if(p.d>0){cx.globalAlpha=.25+.75*p.d;cx.fillStyle='#f5a623';cx.fillRect(p.x-dr/2,p.y-dr/2,dr,dr)}}
+ cx.globalAlpha=1;
+ var tt=(now-t0)/1000;
+ routes.forEach(function(r,i){
+  var a=cities[r[0]].v,b=cities[r[1]].v,N=48,prev=null,head=(tt*.22+i*.17)%1.3;
+  for(var s=0;s<=N;s++){var u=s/N,p=P(slerp(a,b,u),1+.22*Math.sin(Math.PI*u));
+   if(prev&&p.d>0&&prev.d>0){var near=head-u,glow=near>0&&near<.28?1-near/.28:0;
+    cx.beginPath();cx.moveTo(prev.x,prev.y);cx.lineTo(p.x,p.y);
+    cx.strokeStyle=glow?'rgba(255,210,122,'+(.3+.7*glow)+')':'rgba(245,166,35,.22)';cx.lineWidth=W*(glow?.0042:.0018);cx.stroke()}
+   prev=p}
+ });
+ for(var k in cities){var c=cities[k],p=P(c.v);if(p.d<=0)continue;
+  var pulse=(tt*.8+k.length)%1,main=!!c.n;
+  cx.beginPath();cx.arc(p.x,p.y,W*(.008+.02*pulse*(main?1.4:1)),0,7);cx.strokeStyle='rgba(255,210,122,'+(1-pulse)*.7+')';cx.lineWidth=W*.0025;cx.stroke();
+  cx.beginPath();cx.arc(p.x,p.y,W*(main?.0085:.0058),0,7);cx.fillStyle='#ffd27a';cx.shadowColor='#f5a623';cx.shadowBlur=W*.02;cx.fill();cx.shadowBlur=0;
+  if(main){cx.font='600 '+Math.round(W*.027)+'px Inter,sans-serif';cx.fillStyle='#fff';cx.textAlign=p.x>W/2?'left':'right';cx.fillText(c.n,p.x+(p.x>W/2?1:-1)*W*.02,p.y-W*.012)}}
+ requestAnimationFrame(frame)}
+if('IntersectionObserver' in window)new IntersectionObserver(function(es){run=es[0].isIntersecting},{threshold:0}).observe(cv);
+requestAnimationFrame(frame);
+})();
 </script>
 </body>
 
