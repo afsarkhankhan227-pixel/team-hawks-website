@@ -4409,8 +4409,23 @@ function inside(p,poly){var x=p[0],y=p[1],c=false;for(var i=0,j=poly.length-1;i<
 function vec(lon,lat){return[Math.cos(lat*D)*Math.cos(lon*D),Math.cos(lat*D)*Math.sin(lon*D),Math.sin(lat*D)]}
 var dots=[];
 for(var lat=-58;lat<=78;lat+=3){var step=3/Math.max(Math.cos(lat*D),.2);for(var lon=-180;lon<180;lon+=step){for(var k in land){if(inside([lon,lat],land[k])){dots.push(vec(lon,lat));break}}}}
-var cities={pak:{n:'Pakistan',v:vec(69,30)},lon:{n:'London',v:vec(-0.12,51.5)},dxb:{v:vec(55.3,25.2)},nyc:{v:vec(-74,40.7)},sgp:{v:vec(103.8,1.35)},syd:{v:vec(151.2,-33.9)},sfo:{v:vec(-122.4,37.8)},jnb:{v:vec(28,-26)}};
-var routes=[['pak','lon'],['pak','dxb'],['lon','nyc'],['pak','sgp'],['sgp','syd'],['nyc','sfo'],['lon','jnb'],['pak','nyc']];
+
+var cities={
+  pak:{n:'Pakistan',v:vec(69,30)},
+  lon:{n:'London',v:vec(-0.12,51.5)},
+  fra:{n:'France',v:vec(2.35,48.86)},
+  usa:{n:'USA',v:vec(-98.58,39.83)},
+  dxb:{v:vec(55.3,25.2)},
+  nyc:{v:vec(-74,40.7)},
+  sgp:{v:vec(103.8,1.35)},
+  syd:{v:vec(151.2,-33.9)},
+  sfo:{v:vec(-122.4,37.8)},
+  jnb:{v:vec(28,-26)}
+};
+
+
+var routes=[['pak','lon'],['lon','fra'],['fra','usa'],['pak','dxb'],['lon','nyc'],['pak','sgp'],['sgp','syd'],['nyc','sfo'],['lon','jnb'],['pak','nyc']];
+
 function slerp(a,b,t){var d=Math.max(-1,Math.min(1,a[0]*b[0]+a[1]*b[1]+a[2]*b[2])),om=Math.acos(d),s=Math.sin(om)||1,w1=Math.sin((1-t)*om)/s,w2=Math.sin(t*om)/s;return[a[0]*w1+b[0]*w2,a[1]*w1+b[1]*w2,a[2]*w1+b[2]*w2]}
 var cx=cv.getContext('2d'),W,H,R,rot=.7,tilt=.38,t0=performance.now(),run=true;
 function size(){var r=cv.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);W=cv.width=r.width*dpr;H=cv.height=r.height*dpr;R=W*.36}
