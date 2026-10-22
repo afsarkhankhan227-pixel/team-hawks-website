@@ -4453,8 +4453,7 @@ function frame(now){
   var pulse=(tt*.8+k.length)%1,main=!!c.n;
   cx.beginPath();cx.arc(p.x,p.y,W*(.008+.02*pulse*(main?1.4:1)),0,7);cx.strokeStyle='rgba(255,210,122,'+(1-pulse)*.7+')';cx.lineWidth=W*.0025;cx.stroke();
   cx.beginPath();cx.arc(p.x,p.y,W*(main?.0085:.0058),0,7);cx.fillStyle='#ffd27a';cx.shadowColor='#f5a623';cx.shadowBlur=W*.02;cx.fill();cx.shadowBlur=0;
-  if(main){cx.font='600 '+Math.round(W*.027)+'px Inter,sans-serif';cx.fillStyle='#fff';cx.textAlign=p.x>W/2?'left':'right';cx.fillText(c.n,p.x+(p.x>W/2?1:-1)*W*.02,p.y-W*.012)}}
- requestAnimationFrame(frame)}
+if(main){cx.font=
 if('IntersectionObserver' in window)new IntersectionObserver(function(es){run=es[0].isIntersecting},{threshold:0}).observe(cv);
 requestAnimationFrame(frame);
 })();
