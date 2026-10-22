@@ -3358,6 +3358,16 @@ html body section#how-we-work.work-process > .work-process-wrap {
  .hk-float{font-size:11px;padding:8px 11px}.hk-f1{left:2%}.hk-f2{left:8%}.hk-f4{display:none}
 }
 @media(prefers-reduced-motion:reduce){.hk-float{animation:none}}
+    
+/* FIX: Connect timeline line to Step 4 */
+.process-timeline {
+  position: relative;
+}
+
+.process-timeline::before {
+  right: calc(12.5% - 27px) !important;
+}
+
   </style>
 
 </head>
