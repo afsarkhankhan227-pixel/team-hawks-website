@@ -4226,51 +4226,63 @@ body {
 
    
 
-<!-- TEAM HAWKS VIDEO INTRO SCRIPT -->
+
+<!-- TEAM HAWKS VIDEO INTRO - BLACK SCREEN FIX -->
 <script>
 (() => {
-  const loader = document.getElementById("page-loader");
-  const video = document.getElementById("teamHawksIntroVideo");
+  const startIntro = () => {
+    const loader = document.getElementById("page-loader");
+    const video = document.getElementById("teamHawksIntroVideo");
 
-  if (!loader) return;
+    if (!loader) return;
 
-  let finished = false;
-  let fallbackTimer;
+    let finished = false;
 
-  function hideLoader() {
-    if (finished) return;
-    finished = true;
+    function hideLoader() {
+      if (finished) return;
+      finished = true;
 
-    clearTimeout(fallbackTimer);
-    loader.classList.add("loader-hidden");
+      loader.classList.add("loader-hidden");
 
-    setTimeout(() => {
-      loader.remove();
-    }, 900);
-  }
+      // Force the loader to stop covering the website
+      loader.style.setProperty("opacity", "0", "important");
+      loader.style.setProperty("visibility", "hidden", "important");
+      loader.style.setProperty("pointer-events", "none", "important");
 
-  if (!video) {
-    hideLoader();
-    return;
-  }
+      setTimeout(() => {
+        if (loader.isConnected) loader.remove();
+      }, 1000);
+    }
 
-  video.muted = true;
-  video.defaultMuted = true;
-  video.playsInline = true;
-  video.setAttribute("muted", "");
-  video.setAttribute("playsinline", "");
+    // Never leave the website stuck behind the loader
+    const fallbackTimer = setTimeout(hideLoader, 5000);
 
-  video.addEventListener("ended", hideLoader, { once: true });
-  video.addEventListener("error", hideLoader, { once: true });
+    if (!video) {
+      hideLoader();
+      return;
+    }
 
-  fallbackTimer = setTimeout(hideLoader, 10000);
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
 
-  const playPromise = video.play();
+    video.addEventListener("ended", hideLoader, { once: true });
+    video.addEventListener("error", hideLoader, { once: true });
 
-  if (playPromise && typeof playPromise.catch === "function") {
-    playPromise.catch(() => {
-      setTimeout(hideLoader, 2500);
+    video.play().catch(() => {
+      clearTimeout(fallbackTimer);
+      setTimeout(hideLoader, 1000);
     });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startIntro, {
+      once: true
+    });
+  } else {
+    startIntro();
   }
 })();
 </script>
