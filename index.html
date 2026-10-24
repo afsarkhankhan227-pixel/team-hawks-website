@@ -3357,6 +3357,30 @@ html body section#how-we-work.work-process > .work-process-wrap {
   right: 0 !important;
 }
 
+/* TEAM HAWKS — BLACK SCREEN FIX */
+#page-loader.loader-hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+#page-loader {
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background-color: #000;
+}
+
+#page-loader video {
+  max-width: 100%;
+}
+
 
   </style>
 
