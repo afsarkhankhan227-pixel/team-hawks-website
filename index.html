@@ -4201,137 +4201,131 @@ html body section#how-we-work.work-process > .work-process-wrap {
       let finished = false;
 
    
+
+<!-- TEAM HAWKS VIDEO INTRO SCRIPT -->
 <script>
-  (() => {
-    const loader = document.getElementById("page-loader");
-    const video = document.getElementById("teamHawksIntroVideo");
+(() => {
+  const loader = document.getElementById("page-loader");
+  const video = document.getElementById("teamHawksIntroVideo");
 
-    if (!loader || !video) return;
+  if (!loader) return;
 
-    let finished = false;
-    let fallbackTimer;
+  let finished = false;
+  let fallbackTimer;
 
-    function hideLoader() {
-      if (finished) return;
-      finished = true;
+  function hideLoader() {
+    if (finished) return;
+    finished = true;
 
-      clearTimeout(fallbackTimer);
-      loader.classList.add("loader-hidden");
+    clearTimeout(fallbackTimer);
+    loader.classList.add("loader-hidden");
 
-      setTimeout(() => {
-        loader.remove();
-      }, 900);
-    }
+    setTimeout(() => {
+      loader.remove();
+    }, 900);
+  }
 
-    video.muted = true;
-    video.defaultMuted = true;
-    video.playsInline = true;
-    video.setAttribute("muted", "");
-    video.setAttribute("playsinline", "");
+  if (!video) {
+    hideLoader();
+    return;
+  }
 
-    video.addEventListener("ended", hideLoader, { once: true });
-    video.addEventListener("error", hideLoader, { once: true });
+  video.muted = true;
+  video.defaultMuted = true;
+  video.playsInline = true;
+  video.setAttribute("muted", "");
+  video.setAttribute("playsinline", "");
 
-    fallbackTimer = setTimeout(hideLoader, 10000);
+  video.addEventListener("ended", hideLoader, { once: true });
+  video.addEventListener("error", hideLoader, { once: true });
 
-    const playPromise = video.play();
+  fallbackTimer = setTimeout(hideLoader, 10000);
 
-    if (playPromise && typeof playPromise.catch === "function") {
-      playPromise.catch(() => {
-        setTimeout(hideLoader, 2500);
-      });
-    }
-  })();
+  const playPromise = video.play();
+
+  if (playPromise && typeof playPromise.catch === "function") {
+    playPromise.catch(() => {
+      setTimeout(hideLoader, 2500);
+    });
+  }
+})();
 </script>
 
+<!-- IMPACT COUNTERS SCRIPT -->
+<script>
+(() => {
+  const counters = document.querySelectorAll("#impact .count-up");
 
-      // Safety fallback
-      setTimeout(hideLoader, 2000);
-    })();
-  </script>
+  if (!counters.length) return;
 
-  <script>
-    (() => {
-      const counters = document.querySelectorAll(
-        "#impact .count-up"
-      );
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
-      if (!counters.length) return;
+  const showFinalValue = (counter) => {
+    const target = Number(counter.dataset.target);
+    const suffix = counter.dataset.suffix || "";
 
-      const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
+    if (!Number.isFinite(target)) return;
 
-      const showFinalValue = (counter) => {
-        const target = Number(counter.dataset.target);
-        const suffix = counter.dataset.suffix || "";
+    counter.textContent = target.toLocaleString() + suffix;
+  };
 
-        if (!Number.isFinite(target)) return;
+  const animateCounter = (counter) => {
+    if (counter.dataset.animated === "true") return;
 
-        counter.textContent = target.toLocaleString() + suffix;
-      };
+    counter.dataset.animated = "true";
 
-      const animateCounter = (counter) => {
-        if (counter.dataset.animated === "true") return;
+    const target = Number(counter.dataset.target);
+    const suffix = counter.dataset.suffix || "";
 
-        counter.dataset.animated = "true";
+    if (!Number.isFinite(target)) return;
 
-        const target = Number(counter.dataset.target);
-        const suffix = counter.dataset.suffix || "";
+    if (reducedMotion) {
+      showFinalValue(counter);
+      return;
+    }
 
-        if (!Number.isFinite(target)) return;
+    const duration = 1200;
+    const startTime = performance.now();
 
-        if (reducedMotion) {
-          showFinalValue(counter);
-          return;
-        }
+    function update(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(target * eased);
 
-        const duration = 1200;
-        const startTime = performance.now();
+      counter.textContent = current.toLocaleString() + suffix;
 
-        function update(now) {
-          const progress = Math.min(
-            (now - startTime) / duration,
-            1
-          );
-
-          const eased = 1 - Math.pow(1 - progress, 3);
-          const current = Math.round(target * eased);
-
-          counter.textContent =
-            current.toLocaleString() + suffix;
-
-          if (progress < 1) {
-            requestAnimationFrame(update);
-          } else {
-            showFinalValue(counter);
-          }
-        }
-
+      if (progress < 1) {
         requestAnimationFrame(update);
-      };
-
-      if (!("IntersectionObserver" in window)) {
-        counters.forEach(showFinalValue);
-        return;
+      } else {
+        showFinalValue(counter);
       }
+    }
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            animateCounter(entry.target);
-            observer.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.25
-      });
+    requestAnimationFrame(update);
+  };
 
-      counters.forEach((counter) => observer.observe(counter));
-    })();
-  </script>
-  <script>
-(function () {
+  if (!("IntersectionObserver" in window)) {
+    counters.forEach(showFinalValue);
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.25
+  });
+
+  counters.forEach((counter) => observer.observe(counter));
+})();
+</script>
+
   /* SVG icons replace the text glyphs */
   var P = {
     target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
