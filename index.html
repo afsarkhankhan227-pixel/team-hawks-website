@@ -2224,103 +2224,119 @@
       }
     }
 
-  
-/* TEAM HAWKS — RESPONSIVE VIDEO INTRO */
+    /* TEAM HAWKS PAGE LOADER */
+    #page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #07080a;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
 
-#page-loader {
-  position: fixed;
-  inset: 0;
-  z-index: 999999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding: 20px;
-  overflow: hidden;
-  background: #000;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
-}
+    #page-loader.loader-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
 
-#page-loader.loader-hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
+    .loader-content {
+      width: min(320px, 85%);
+      text-align: center;
+      animation: loader-enter 0.8s ease both;
+    }
 
-.loader-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 560px;
-  margin: auto;
-  animation: loader-enter 0.8s ease both;
-}
+    .loader-logo {
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 22px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #e8b04a;
+      border-radius: 16px;
+      color: #e8b04a;
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -2px;
+      box-shadow: 0 0 35px #e8b04a18;
+    }
 
-.loader-video {
-  display: block;
-  width: min(82vw, 82vh, 560px);
-  width: min(82vw, 82dvh, 560px);
-  max-width: 100%;
-  max-height: 82vh;
-  max-height: 82dvh;
-  aspect-ratio: 1 / 1;
-  height: auto;
-  object-fit: contain;
-  object-position: center;
-  border: 0;
-  outline: 0;
-  background: #000;
-}
+    .loader-content h2 {
+      margin: 0;
+      color: #f5f5f5;
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
 
-/* Smooth entrance */
-@keyframes loader-enter {
-  from {
-    opacity: 0;
-    transform: scale(0.97);
-  }
+    .loader-content h2 span {
+      color: #e8b04a;
+    }
 
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
+    .loader-content p {
+      margin: 10px 0 28px;
+      color: #929292;
+      font-size: 9px;
+      letter-spacing: 4px;
+    }
 
-/* Mobile screens */
-@media (max-width: 600px) {
-  #page-loader {
-    padding: 14px;
-  }
+    .loader-line {
+      width: 210px;
+      max-width: 100%;
+      height: 2px;
+      margin: auto;
+      overflow: hidden;
+      background: #262626;
+    }
 
-  .loader-content {
-    max-width: 100%;
-  }
+    .loader-line span {
+      display: block;
+      width: 40%;
+      height: 100%;
+      background: #e8b04a;
+      box-shadow: 0 0 12px #e8b04a;
+      animation: loader-progress 1.2s ease-in-out infinite;
+    }
 
-  .loader-video {
-    width: min(88vw, 82dvh, 560px);
-  }
-}
+    @keyframes loader-progress {
+      from {
+        transform: translateX(-110%);
+      }
 
-/* Short screens and landscape phones */
-@media (max-height: 500px) {
-  .loader-video {
-    width: min(70vw, 78vh, 560px);
-  }
-}
+      to {
+        transform: translateX(360%);
+      }
+    }
 
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  #page-loader,
-  .loader-content {
-    animation: none;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-}
+    @keyframes loader-enter {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
 
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      #page-loader,
+      .loader-content {
+        transition: none;
+        animation: none;
+      }
+
+      .loader-line span {
+        animation: none;
+        width: 100%;
+      }
+    }
 
 /* ANIMATED TEAM HAWKS INTRO TEXT */
 .loader-content h2 {
@@ -3357,30 +3373,6 @@ html body section#how-we-work.work-process > .work-process-wrap {
   right: 0 !important;
 }
 
-/* TEAM HAWKS — BLACK SCREEN FIX */
-#page-loader.loader-hidden {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
-#page-loader {
-  transition: opacity 0.8s ease, visibility 0.8s ease;
-}
-
-html,
-body {
-  min-height: 100%;
-}
-
-body {
-  background-color: #000;
-}
-
-#page-loader video {
-  max-width: 100%;
-}
-
 
   </style>
 
@@ -3388,24 +3380,21 @@ body {
 
 <body>
 
-<!-- TEAM HAWKS VIDEO INTRO -->
-<div id="page-loader" role="status" aria-label="Team Hawks introduction">
-  <div class="loader-content">
-    <video
-      id="teamHawksIntroVideo"
-      class="loader-video"
-      autoplay
-      muted
-      playsinline
-      webkit-playsinline
-      preload="auto"
-      aria-label="Team Hawks cinematic introduction"
-    >
-      <source src="./team-hawks-intro.mp4" type="video/mp4">
-    </video>
-  </div>
-</div>
+  <!-- TEAM HAWKS LOADING INTRO -->
+  <div id="page-loader">
+    <div class="loader-content">
 
+      <img src="./team-hawks-site/logo.jpg" alt="Team Hawks Logo" class="loader-logo">
+
+      <h2>TEAM <span>HAWKS</span></h2>
+
+      <p>OUTSOURCING PARTNER</p>
+
+      <div class="loader-line">
+        <span></span>
+      </div>
+    </div>
+  </div>
 
   <!-- HEADER -->
   <header class="site-header">
@@ -4224,144 +4213,110 @@ body {
 
       let finished = false;
 
-   
+      function hideLoader() {
+        if (finished) return;
+        finished = true;
 
+        setTimeout(() => {
+          loader.classList.add("loader-hidden");
 
-<!-- TEAM HAWKS VIDEO INTRO - BLACK SCREEN FIX -->
-<script>
-(() => {
-  const startIntro = () => {
-    const loader = document.getElementById("page-loader");
-    const video = document.getElementById("teamHawksIntroVideo");
+          setTimeout(() => loader.remove(), 800);
+        }, 500);
+      }
 
-    if (!loader) return;
-
-    let finished = false;
-
-    function hideLoader() {
-      if (finished) return;
-      finished = true;
-
-      loader.classList.add("loader-hidden");
-
-      // Force the loader to stop covering the website
-      loader.style.setProperty("opacity", "0", "important");
-      loader.style.setProperty("visibility", "hidden", "important");
-      loader.style.setProperty("pointer-events", "none", "important");
-
-      setTimeout(() => {
-        if (loader.isConnected) loader.remove();
-      }, 1000);
-    }
-
-    // Never leave the website stuck behind the loader
-    const fallbackTimer = setTimeout(hideLoader, 5000);
-
-    if (!video) {
-      hideLoader();
-      return;
-    }
-
-    video.muted = true;
-    video.defaultMuted = true;
-    video.playsInline = true;
-    video.setAttribute("muted", "");
-    video.setAttribute("playsinline", "");
-
-    video.addEventListener("ended", hideLoader, { once: true });
-    video.addEventListener("error", hideLoader, { once: true });
-
-    video.play().catch(() => {
-      clearTimeout(fallbackTimer);
-      setTimeout(hideLoader, 1000);
-    });
-  };
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", startIntro, {
-      once: true
-    });
-  } else {
-    startIntro();
-  }
-})();
-</script>
-
-<!-- IMPACT COUNTERS SCRIPT -->
-<script>
-(() => {
-  const counters = document.querySelectorAll("#impact .count-up");
-
-  if (!counters.length) return;
-
-  const reducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-
-  const showFinalValue = (counter) => {
-    const target = Number(counter.dataset.target);
-    const suffix = counter.dataset.suffix || "";
-
-    if (!Number.isFinite(target)) return;
-
-    counter.textContent = target.toLocaleString() + suffix;
-  };
-
-  const animateCounter = (counter) => {
-    if (counter.dataset.animated === "true") return;
-
-    counter.dataset.animated = "true";
-
-    const target = Number(counter.dataset.target);
-    const suffix = counter.dataset.suffix || "";
-
-    if (!Number.isFinite(target)) return;
-
-    if (reducedMotion) {
-      showFinalValue(counter);
-      return;
-    }
-
-    const duration = 1200;
-    const startTime = performance.now();
-
-    function update(now) {
-      const progress = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.round(target * eased);
-
-      counter.textContent = current.toLocaleString() + suffix;
-
-      if (progress < 1) {
-        requestAnimationFrame(update);
+      if (document.readyState === "complete") {
+        hideLoader();
       } else {
-        showFinalValue(counter);
+        window.addEventListener("load", hideLoader, { once: true });
       }
-    }
 
-    requestAnimationFrame(update);
-  };
+      // Safety fallback
+      setTimeout(hideLoader, 2000);
+    })();
+  </script>
 
-  if (!("IntersectionObserver" in window)) {
-    counters.forEach(showFinalValue);
-    return;
-  }
+  <script>
+    (() => {
+      const counters = document.querySelectorAll(
+        "#impact .count-up"
+      );
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        observer.unobserve(entry.target);
+      if (!counters.length) return;
+
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      const showFinalValue = (counter) => {
+        const target = Number(counter.dataset.target);
+        const suffix = counter.dataset.suffix || "";
+
+        if (!Number.isFinite(target)) return;
+
+        counter.textContent = target.toLocaleString() + suffix;
+      };
+
+      const animateCounter = (counter) => {
+        if (counter.dataset.animated === "true") return;
+
+        counter.dataset.animated = "true";
+
+        const target = Number(counter.dataset.target);
+        const suffix = counter.dataset.suffix || "";
+
+        if (!Number.isFinite(target)) return;
+
+        if (reducedMotion) {
+          showFinalValue(counter);
+          return;
+        }
+
+        const duration = 1200;
+        const startTime = performance.now();
+
+        function update(now) {
+          const progress = Math.min(
+            (now - startTime) / duration,
+            1
+          );
+
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.round(target * eased);
+
+          counter.textContent =
+            current.toLocaleString() + suffix;
+
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          } else {
+            showFinalValue(counter);
+          }
+        }
+
+        requestAnimationFrame(update);
+      };
+
+      if (!("IntersectionObserver" in window)) {
+        counters.forEach(showFinalValue);
+        return;
       }
-    });
-  }, {
-    threshold: 0.25
-  });
 
-  counters.forEach((counter) => observer.observe(counter));
-})();
-</script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.25
+      });
 
+      counters.forEach((counter) => observer.observe(counter));
+    })();
+  </script>
+  <script>
+(function () {
   /* SVG icons replace the text glyphs */
   var P = {
     target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
