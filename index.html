@@ -3376,6 +3376,53 @@ html body section#how-we-work.work-process > .work-process-wrap {
 .services-grid { grid-template-columns: repeat(3, 1fr); }
 @media (max-width: 1000px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px)  { .services-grid { grid-template-columns: 1fr; } }
+    /* SERVICE CARDS: icon fix + bigger text */
+
+/* icon ab sirf apne size jitni jagah leta hai, is liye hover par kinare mein nahi jata */
+.service-icon {
+  display: block;
+  width: max-content;
+  margin-bottom: 18px;
+  transform-origin: center;
+}
+
+.service-icon svg {
+  width: 34px;
+  height: 34px;
+}
+
+/* bara aur saaf text */
+.service-number {
+  font-size: 12px;
+  margin-bottom: 26px;
+}
+
+.service-card h3 {
+  font-size: 19px;
+  line-height: 1.35;
+  margin: 0 0 12px;
+}
+
+.service-card p {
+  font-size: 14.5px;
+  line-height: 1.75;
+}
+
+.service-arrow {
+  font-size: 22px;
+  margin-top: 22px;
+}
+
+.service-card {
+  padding: 28px 26px;
+}
+
+/* mobile par thora chhota, taake screen mein achha lage */
+@media (max-width: 600px) {
+  .service-card h3 { font-size: 17px; }
+  .service-card p { font-size: 13.5px; }
+  .service-card { padding: 24px 20px; }
+}
 
   </style>
 
