@@ -3423,7 +3423,43 @@ html body section#how-we-work.work-process > .work-process-wrap {
   .service-card p { font-size: 13.5px; }
   .service-card { padding: 24px 20px; }
 }
+/* SERVICE ICON: box + visible hover animation (card ke andar hi rehta hai) */
+.service-icon {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(245, 166, 35, .35);
+  border-radius: 14px;
+  background: rgba(245, 166, 35, .08);
+  color: var(--gold);
+  transform-origin: center;
+  transition: transform .4s cubic-bezier(.34, 1.56, .64, 1),
+              background .35s ease,
+              border-color .35s ease,
+              box-shadow .35s ease,
+              color .35s ease;
+}
 
+.service-icon svg {
+  width: 30px;
+  height: 30px;
+  transition: transform .4s ease;
+}
+
+.service-card:hover .service-icon {
+  transform: translateY(-4px) scale(1.12) rotate(-8deg);
+  background: rgba(245, 166, 35, .2);
+  border-color: rgba(245, 166, 35, .85);
+  color: #ffc15b;
+  box-shadow: 0 0 26px rgba(245, 166, 35, .45);
+  filter: none;
+}
+
+.service-card:hover .service-icon svg {
+  transform: scale(1.08);
+}
   </style>
 
 </head>
