@@ -3510,6 +3510,133 @@ html body section#how-we-work.work-process > .work-process-wrap {
   .service-card h3 { font-size: 16.5px; }
   .service-card p { font-size: 13.5px; }
 }
+      /* =====================================================
+   TEAM HAWKS: GOLDEN GLASS STAT CARDS
+   (style from reference image, pure black page kept)
+===================================================== */
+#impact .ti-stats {
+  position: relative;
+  gap: 18px;
+  margin-top: 52px;
+  padding: 0 0 46px;
+}
+
+/* soft gold glow behind the row only */
+#impact .ti-stats::before {
+  content: "";
+  position: absolute;
+  inset: 10% 4% 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 55%, rgba(245,166,35,.16), transparent 68%);
+  filter: blur(30px);
+}
+
+/* glowing floor line under the cards */
+#impact .ti-stats::after {
+  content: "";
+  position: absolute;
+  left: 3%;
+  right: 3%;
+  bottom: 14px;
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255,210,122,.9), transparent);
+  box-shadow: 0 0 28px 6px rgba(245,166,35,.35);
+}
+
+#impact .ti-stat {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 26px 24px 24px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,196,90,.45);
+  background:
+    linear-gradient(180deg, rgba(255,214,130,.22) 0%, rgba(245,166,35,.10) 38%, rgba(120,70,5,.18) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,235,190,.45),
+    inset 0 -20px 40px rgba(245,166,35,.08),
+    0 24px 40px -18px rgba(245,166,35,.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+/* remove the old thin dividers between stats */
+#impact .ti-stat::before { display: none; }
+
+/* glass shine sweeping across on hover */
+#impact .ti-stat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,230,170,.22) 50%, transparent 70%);
+  transform: translateX(-130%);
+  transition: transform .8s ease;
+}
+
+#impact .ti-stat:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255,210,122,.85);
+  box-shadow:
+    inset 0 1px 0 rgba(255,235,190,.6),
+    0 30px 50px -16px rgba(245,166,35,.5),
+    0 0 34px rgba(245,166,35,.22);
+}
+
+#impact .ti-stat:hover::after { transform: translateX(130%); }
+
+/* reorder inside the card: icon, label, number, description */
+#impact .ti-icon  { order: 1; margin: 0 0 18px; width: 54px; height: 54px;
+                    border: 0; border-radius: 0; background: none; }
+#impact .ti-label { order: 2; margin: 0; font-size: 16px; font-weight: 600; color: #fff6e0; }
+#impact .ti-num   { order: 3; margin-top: 6px; font-size: clamp(40px, 4.4vw, 58px);
+                    font-weight: 800; letter-spacing: -1px; }
+#impact .ti-desc  { order: 4; margin-top: 10px; font-size: 13px; color: #d8c8a3; }
+
+#impact .ti-icon svg {
+  width: 40px; height: 40px;
+  stroke: #fff3d6; stroke-width: 1.6;
+  filter: drop-shadow(0 0 8px rgba(245,166,35,.65));
+}
+
+/* small gold ▲ after each number, like the reference */
+#impact .ti-num::after {
+  content: "▲";
+  display: inline-block;
+  margin-left: 6px;
+  font-size: .28em;
+  vertical-align: top;
+  position: relative;
+  top: .6em;
+  -webkit-text-fill-color: #ffc15b;
+  color: #ffc15b;
+}
+
+/* mobile */
+@media (max-width: 900px) {
+  #impact .ti-stats { gap: 14px; row-gap: 14px; }
+}
+@media (max-width: 480px) {
+  #impact .ti-stat { padding: 20px 16px; border-radius: 16px; }
+  #impact .ti-icon svg { width: 32px; height: 32px; }
+  #impact .ti-label { font-size: 14px; }
+  #impact .ti-desc { font-size: 12px; }
+  #impact .ti-desc br { display: none; }
+}
+
+@media (hover: none) {
+  #impact .ti-stat:hover { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #impact .ti-stat, #impact .ti-stat::after { transition: none !important; }
+}
   </style>
 
 </head>
