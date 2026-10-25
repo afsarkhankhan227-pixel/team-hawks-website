@@ -3668,6 +3668,66 @@ html.intro-lock body {
   cursor: pointer;
 }
 #skipIntro:hover { background: #f5a623; color: #111; }
+    /* ===== BIGGER LOGO (header + footer) ===== */
+
+/* Header logo */
+.site-header img.brand-mark {
+  width: 112px;
+  height: 112px;
+  object-fit: contain;
+}
+
+/* Header needs more height for the bigger logo */
+.site-header .nav-inner {
+  min-height: 130px;
+}
+
+/* Footer logo */
+.site-footer img.footer-logo {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+}
+
+/* Anchor links should not hide under the taller header */
+html {
+  scroll-padding-top: 145px;
+}
+section {
+  scroll-margin-top: 145px;
+}
+
+/* Tablet */
+@media (max-width: 960px) {
+  .site-header .nav-inner {
+    min-height: 104px;
+  }
+  .site-header img.brand-mark {
+    width: 84px;
+    height: 84px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .site-header .nav-inner {
+    min-height: 88px;
+  }
+  .site-header img.brand-mark {
+    width: 68px;
+    height: 68px;
+  }
+  .site-footer img.footer-logo {
+    width: 96px;
+    height: 96px;
+  }
+  html {
+    scroll-padding-top: 105px;
+  }
+  section {
+    scroll-margin-top: 105px;
+  }
+}
   </style>
 
 </head>
