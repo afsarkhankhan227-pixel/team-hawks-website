@@ -3637,27 +3637,43 @@ html body section#how-we-work.work-process > .work-process-wrap {
 @media (prefers-reduced-motion: reduce) {
   #impact .ti-stat, #impact .ti-stat::after { transition: none !important; }
 }
+    /* INTRO VIDEO */
+#page-loader { background: #000; }
+
+#page-loader video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+  display: block;
+}
+
+#skipIntro {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  padding: 9px 18px;
+  border: 1px solid rgba(245, 166, 35, .6);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, .55);
+  color: #f5a623;
+  font: 700 12px var(--font);
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+#skipIntro:hover { background: #f5a623; color: #111; }
   </style>
 
 </head>
 
 <body>
-
-  <!-- TEAM HAWKS LOADING INTRO -->
-  <div id="page-loader">
-    <div class="loader-content">
-
-      <img src="./team-hawks-site/logo.jpg" alt="Team Hawks Logo" class="loader-logo">
-
-      <h2>TEAM <span>HAWKS</span></h2>
-
-      <p>OUTSOURCING PARTNER</p>
-
-      <div class="loader-line">
-        <span></span>
-      </div>
-    </div>
-  </div>
+<!-- TEAM HAWKS INTRO VIDEO -->
+<div id="page-loader">
+  <video id="introVideo" muted autoplay playsinline preload="auto">
+    <source src="./intro.mp4" type="video/mp4">
+  </video>
+  <button id="skipIntro" type="button">Skip ↗</button>
+</div>
 
   <!-- HEADER -->
   <header class="site-header">
@@ -4497,34 +4513,35 @@ html body section#how-we-work.work-process > .work-process-wrap {
 
   </script>
 
-  <script>
-    (() => {
-      const loader = document.getElementById("page-loader");
-      if (!loader) return;
+ <script>
+  (() => {
+    const loader = document.getElementById("page-loader");
+    const video  = document.getElementById("introVideo");
+    const skip   = document.getElementById("skipIntro");
+    if (!loader) return;
 
-      let finished = false;
+    let finished = false;
 
-      function hideLoader() {
-        if (finished) return;
-        finished = true;
+    function hideLoader() {
+      if (finished) return;
+      finished = true;
+      loader.classList.add("loader-hidden");
+      setTimeout(() => loader.remove(), 800);
+    }
 
-        setTimeout(() => {
-          loader.classList.add("loader-hidden");
+    if (video) {
+      video.muted = true;
+      video.addEventListener("ended", hideLoader);
+      video.addEventListener("error", hideLoader);
+      video.play().catch(hideLoader);
+    }
 
-          setTimeout(() => loader.remove(), 800);
-        }, 500);
-      }
+    if (skip) skip.addEventListener("click", hideLoader);
 
-      if (document.readyState === "complete") {
-        hideLoader();
-      } else {
-        window.addEventListener("load", hideLoader, { once: true });
-      }
-
-      // Safety fallback
-      setTimeout(hideLoader, 2000);
-    })();
-  </script>
+    // Safety limit: your video length + 1 second, in milliseconds
+    setTimeout(hideLoader, 12000);
+  })();
+</script>
 
   <script>
     (() => {
