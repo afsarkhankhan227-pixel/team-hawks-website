@@ -3753,6 +3753,85 @@ section {
 @media (max-width: 370px) {
   .video-frame { width: 280px; }
 }
+    /* TEAM HAWKS: TESTIMONIALS AUTO-SCROLL (MARQUEE) */
+
+/* speed: bara number = slow. 55s normal speed hai */
+#about .ti-cards.ti-marquee {
+  --ti-speed: 55s;
+  --ti-card-w: 390px;
+  --ti-gap: 20px;
+
+  display: block;
+  overflow: hidden;
+  margin-top: 30px;
+  padding: 22px 0 34px;
+  gap: 0;
+  scroll-snap-type: none;
+
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+#about .ti-marquee .ti-track {
+  display: flex;
+  width: max-content;
+  align-items: stretch;
+  animation: ti-scroll var(--ti-speed) linear infinite;
+  will-change: transform;
+}
+
+#about .ti-marquee .ti-group {
+  display: flex;
+  align-items: stretch;
+  gap: var(--ti-gap);
+  padding-right: var(--ti-gap);
+}
+
+#about .ti-cards.ti-marquee .ti-card {
+  flex: 0 0 var(--ti-card-w);
+  width: var(--ti-card-w);
+  scroll-snap-align: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 1;
+  translate: none;
+}
+
+/* hover karne pe scroll ruk jaye */
+#about .ti-marquee:hover .ti-track,
+#about .ti-marquee:focus-within .ti-track {
+  animation-play-state: paused;
+}
+
+@keyframes ti-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (max-width: 900px) {
+  #about .ti-cards.ti-marquee {
+    display: block;
+    --ti-card-w: 340px;
+    --ti-speed: 48s;
+  }
+}
+
+@media (max-width: 600px) {
+  #about .ti-cards.ti-marquee {
+    --ti-card-w: 290px;
+    --ti-gap: 14px;
+    --ti-speed: 40s;
+  }
+}
+
+@media (hover: none) {
+  #about .ti-marquee:active .ti-track { animation-play-state: paused; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #about .ti-marquee .ti-track { animation: none; }
+}
   </style>
 
 </head>
@@ -4908,6 +4987,43 @@ function frame(now){
  requestAnimationFrame(frame)}
 if('IntersectionObserver' in window)new IntersectionObserver(function(es){run=es[0].isIntersecting},{threshold:0}).observe(cv);
 requestAnimationFrame(frame);
+})();
+</script>
+  <script>
+/* TESTIMONIALS MARQUEE: 3 cards se endless loop banata hai */
+(function () {
+  var wrap = document.querySelector('#about .ti-cards');
+  if (!wrap) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var originals = Array.prototype.slice.call(wrap.querySelectorAll('.ti-card'));
+  if (!originals.length) return;
+
+  /* scroll-reveal ki .rv class hata di, warna cards hidden reh sakte hain */
+  originals.forEach(function (c) { c.classList.remove('rv', 'in'); });
+
+  /* ek group = cards 2 baar, taake screen se wide rahe */
+  var group = document.createElement('div');
+  group.className = 'ti-group';
+  originals.forEach(function (c) { group.appendChild(c); });
+  originals.forEach(function (c) {
+    var dup = c.cloneNode(true);
+    dup.setAttribute('aria-hidden', 'true');
+    group.appendChild(dup);
+  });
+
+  /* doosra same group = seamless loop */
+  var group2 = group.cloneNode(true);
+  group2.setAttribute('aria-hidden', 'true');
+
+  var track = document.createElement('div');
+  track.className = 'ti-track';
+  track.appendChild(group);
+  track.appendChild(group2);
+
+  wrap.innerHTML = '';
+  wrap.appendChild(track);
+  wrap.classList.add('ti-marquee');
 })();
 </script>
 </body>
