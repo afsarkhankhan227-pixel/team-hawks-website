@@ -3960,7 +3960,217 @@ section {
     font-size: 36px;
   }
 }
+    /* =========================================
+   TESTIMONIALS — CLEAN AUTO-SCROLL MARQUEE
+========================================= */
 
+/* Fallback (before JS runs / reduced motion): simple responsive grid */
+#about .ti-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 38px;
+}
+
+/* Marquee wrapper: full screen width */
+#about .ti-cards.ti-marquee {
+  --ti-speed: 60s;      /* bigger number = slower */
+  --ti-card-w: 340px;   /* card width */
+  --ti-gap: 20px;
+  --ti-lines: 7;        /* max lines of review text */
+
+  display: block;
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin: 34px 0 0 -50vw;
+  padding: 20px 0 30px;   /* room for the hover lift */
+  overflow: hidden;
+}
+
+#about .ti-marquee .ti-track {
+  display: flex;
+  width: max-content;
+  animation: ti-scroll var(--ti-speed) linear infinite;
+  will-change: transform;
+}
+
+#about .ti-marquee .ti-group {
+  display: flex;
+  gap: var(--ti-gap);
+  padding-right: var(--ti-gap);
+}
+
+/* Pause on hover / touch */
+#about .ti-marquee:hover .ti-track,
+#about .ti-marquee:focus-within .ti-track,
+#about .ti-marquee:active .ti-track {
+  animation-play-state: paused;
+}
+
+@keyframes ti-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Card */
+#about .ti-marquee .ti-card {
+  flex: 0 0 var(--ti-card-w);
+  width: var(--ti-card-w);
+  min-height: 0;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  border-radius: 14px;
+  opacity: 1;
+  translate: none;
+}
+
+#about .ti-marquee .ti-quote {
+  flex: 1;
+  min-width: 0;
+  gap: 12px;
+}
+
+#about .ti-marquee .ti-qmark {
+  font-size: 38px;
+}
+
+#about .ti-marquee .ti-card blockquote {
+  min-width: 0;
+  font-size: 13.5px;
+  line-height: 1.65;
+  display: -webkit-box;
+  -webkit-line-clamp: var(--ti-lines);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+#about .ti-marquee .ti-person {
+  margin-top: 18px;
+  padding-top: 14px;
+}
+
+#about .ti-marquee .ti-person img {
+  width: 42px;
+  height: 42px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  #about .ti-cards.ti-marquee { --ti-card-w: 310px; --ti-speed: 50s; }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  #about .ti-cards.ti-marquee {
+    --ti-card-w: 270px;
+    --ti-gap: 14px;
+    --ti-speed: 42s;
+    --ti-lines: 8;
+  }
+  #about .ti-marquee .ti-card { padding: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #about .ti-marquee .ti-track { animation: none; }
+}
+/* =====================================================
+   TEAM HAWKS — SERVICE CARDS: GLOWING 3D CARD
+   (effect from the reference video, in the gold theme)
+
+   Paste this at the VERY END of your <style> block.
+
+   To recolor the glow, change --glow below (R, G, B):
+     gold  = 245, 166, 35
+     red   = 255, 60, 70
+     green = 40, 220, 110
+     blue  = 70, 150, 255
+===================================================== */
+
+.services-grid .service-card {
+  --glow: 245, 166, 35;
+  --rx: -4deg;   /* default tilt (CSS-only fallback) */
+  --ry: 10deg;
+
+  border: 1px solid rgba(var(--glow), .22);
+  border-radius: 16px;
+  background-color: #1f2124;
+
+  /* layers: 7 stars + gold aurora at the top + your gray card body */
+  background-image:
+    radial-gradient(circle 1.6px at 12% 20%, #ffe9b8 55%, transparent 100%),
+    radial-gradient(circle 1.2px at 27% 38%, #ffffff 55%, transparent 100%),
+    radial-gradient(circle 1.8px at 41% 14%, #ffdca0 55%, transparent 100%),
+    radial-gradient(circle 1.2px at 58% 34%, #ffffff 55%, transparent 100%),
+    radial-gradient(circle 1.6px at 72% 18%, #ffe9b8 55%, transparent 100%),
+    radial-gradient(circle 1.2px at 86% 40%, #ffffff 55%, transparent 100%),
+    radial-gradient(circle 1.4px at 93% 12%, #ffdca0 55%, transparent 100%),
+    radial-gradient(ellipse 60% 100% at 50% 0%, rgba(var(--glow), .38), transparent 75%),
+    linear-gradient(150deg, #2b2d31, #1f2124);
+  background-size:
+    100% 46%, 100% 46%, 100% 46%, 100% 46%, 100% 46%, 100% 46%, 100% 46%,
+    240% 46%,
+    100% 100%;
+  background-position:
+    0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0,
+    0% 0,
+    0 0;
+  background-repeat: no-repeat;
+
+  /* soft idle glow, strongest under the card */
+  box-shadow:
+    0 14px 30px -14px rgba(var(--glow), .5),
+    0 0 0 1px rgba(var(--glow), .06);
+
+  transition:
+    opacity .8s ease,
+    translate .8s ease,
+    transform .5s ease,
+    box-shadow .5s ease,
+    border-color .5s ease,
+    background-position .9s ease;
+}
+
+/* HOVER: 3D tilt + bright glow + aurora slides across the top */
+.services-grid .service-card:hover,
+.services-grid .service-card:focus-within {
+  transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-6px);
+  border-color: rgba(var(--glow), .65);
+  background-position:
+    0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0,
+    100% 0,
+    0 0;
+  box-shadow:
+    0 30px 50px -16px rgba(var(--glow), .75),
+    0 0 40px rgba(var(--glow), .30),
+    0 0 0 1px rgba(var(--glow), .35);
+
+  /* faster transform while hovering so it follows the mouse smoothly */
+  transition:
+    opacity .8s ease,
+    translate .8s ease,
+    transform .18s ease-out,
+    box-shadow .5s ease,
+    border-color .5s ease,
+    background-position .9s ease;
+}
+
+/* Touch screens: no tilt, keep the glow */
+@media (hover: none) {
+  .services-grid .service-card:hover {
+    transform: none;
+  }
+}
+
+/* Reduced motion: no tilt */
+@media (prefers-reduced-motion: reduce) {
+  .services-grid .service-card:hover,
+  .services-grid .service-card:focus-within {
+    transform: none;
+  }
+}
   </style>
 
 </head>
@@ -5174,9 +5384,37 @@ requestAnimationFrame(frame);
 
   wrap.innerHTML = '';
   wrap.appendChild(track);
-  wrap.classList.add('ti-marquee');
+  wrap.classList.add('ti-marquee');<!--
+  TEAM HAWKS — SERVICE CARDS: MOUSE-FOLLOW TILT
+  Paste this just BEFORE </body> (after your other scripts).
+  Change MAX to tilt more (try 16) or less (try 8).
+
+<script>
+  (function () {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var MAX = 10; /* max tilt in degrees */
+
+    document.querySelectorAll('.service-card').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.setProperty('--ry', (x * MAX * 2).toFixed(2) + 'deg');
+        card.style.setProperty('--rx', (-y * MAX * 2).toFixed(2) + 'deg');
+      });
+
+      card.addEventListener('pointerleave', function () {
+        card.style.removeProperty('--rx');
+        card.style.removeProperty('--ry');
+      });
+    });
+  })();
+</script>
 })();
 </script>
+  
 </body>
 
 </html>
