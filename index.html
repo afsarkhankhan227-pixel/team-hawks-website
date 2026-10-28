@@ -4171,6 +4171,120 @@ section {
     transform: none;
   }
 }
+    
+/* ==========================================
+   TEAM HAWKS — TESTIMONIAL MARQUEE FIX
+   One horizontal row + seamless auto-scroll
+========================================== */
+
+#about .ti-cards.ti-marquee {
+  --ti-card-w: 350px;
+  --ti-gap: 20px;
+  --ti-speed: 55s;
+
+  display: block !important;
+  position: relative;
+  left: 50%;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin: 30px 0 0 -50vw !important;
+  padding: 24px 0 32px !important;
+
+  overflow: hidden !important;
+  box-sizing: border-box;
+  grid-template-columns: none !important;
+  gap: 0 !important;
+  animation: none !important;
+}
+
+/* Moving track */
+#about .ti-cards.ti-marquee .ti-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch;
+  width: max-content !important;
+  max-width: none !important;
+
+  animation: ti-scroll var(--ti-speed) linear infinite !important;
+  animation-play-state: running;
+  will-change: transform;
+}
+
+/* Both duplicated groups stay in one row */
+#about .ti-cards.ti-marquee .ti-group {
+  display: flex !important;
+  flex: 0 0 auto;
+  flex-wrap: nowrap !important;
+  align-items: stretch;
+  gap: var(--ti-gap);
+  padding-right: var(--ti-gap);
+}
+
+/* Equal-width testimonial cards */
+#about .ti-cards.ti-marquee .ti-card {
+  display: flex !important;
+  flex: 0 0 var(--ti-card-w) !important;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: var(--ti-card-w) !important;
+  min-width: var(--ti-card-w) !important;
+  max-width: var(--ti-card-w) !important;
+  min-height: 280px;
+  height: auto !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+}
+
+/* Keep testimonial content properly aligned */
+#about .ti-cards.ti-marquee .ti-quote {
+  flex: 1;
+  min-width: 0;
+}
+
+#about .ti-cards.ti-marquee .ti-person {
+  margin-top: 18px;
+}
+
+/* Pause on hover */
+#about .ti-cards.ti-marquee:hover .ti-track,
+#about .ti-cards.ti-marquee:focus-within .ti-track {
+  animation-play-state: paused !important;
+}
+
+/* Seamless movement: JS duplicates the cards and groups */
+@keyframes ti-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  #about .ti-cards.ti-marquee {
+    --ti-card-w: 310px;
+    --ti-gap: 16px;
+    --ti-speed: 48s;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  #about .ti-cards.ti-marquee {
+    --ti-card-w: 280px;
+    --ti-gap: 14px;
+    --ti-speed: 40s;
+  }
+
+  #about .ti-cards.ti-marquee .ti-card {
+    min-height: 260px;
+    padding: 18px !important;
+  }
+}
+
   </style>
 
 </head>
