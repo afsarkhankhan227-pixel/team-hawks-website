@@ -3845,6 +3845,122 @@ section {
   margin-left: -50vw;
   margin-right: 0;
 }
+/* TEAM HAWKS — RESPONSIVE TESTIMONIAL CARDS */
+#about .ti-cards {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 22px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 38px auto 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  animation: none !important;
+  transform: none !important;
+  align-items: stretch !important;
+}
+
+#about .ti-cards .ti-card {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 280px;
+  height: 100%;
+  box-sizing: border-box !important;
+  padding: 22px !important;
+  border-radius: 12px;
+}
+
+#about .ti-card .ti-quote {
+  flex: 1;
+  min-width: 0;
+}
+
+#about .ti-card blockquote {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+#about .ti-card .ti-person {
+  margin-top: 22px;
+  padding-top: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+#about .ti-person > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* TABLETS */
+@media (max-width: 900px) {
+  #about .ti-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+  }
+
+  #about .ti-cards .ti-card {
+    min-height: 260px;
+    padding: 20px !important;
+  }
+}
+
+/* MOBILE PHONES */
+@media (max-width: 600px) {
+  #about .ti-clients,
+  .ti-clients {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #about .ti-cards {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px !important;
+    margin-top: 28px !important;
+  }
+
+  #about .ti-cards .ti-card {
+    min-height: 0;
+    height: auto;
+    padding: 20px !important;
+  }
+
+  #about .ti-card blockquote {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  #about .ti-person strong {
+    font-size: 14px;
+  }
+
+  #about .ti-person span {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+
+/* SMALL PHONES */
+@media (max-width: 380px) {
+  #about .ti-cards .ti-card {
+    padding: 16px !important;
+  }
+
+  #about .ti-card .ti-quote {
+    gap: 10px;
+  }
+
+  #about .ti-qmark {
+    font-size: 36px;
+  }
+}
+
   </style>
 
 </head>
