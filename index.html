@@ -4284,7 +4284,17 @@ section {
     padding: 18px !important;
   }
 }
+/* show full text of long reviews in the marquee */
+#about .ti-cards.ti-marquee .ti-card blockquote {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
 
+/* cards in the row should all be the same height */
+#about .ti-cards.ti-marquee .ti-card {
+  min-height: 320px;
+}
   </style>
 
 </head>
@@ -5465,7 +5475,8 @@ requestAnimationFrame(frame);
 })();
 </script>
   <script>
-/* TESTIMONIALS MARQUEE: 3 cards se endless loop banata hai */
+<script>
+/* TESTIMONIALS MARQUEE: one row, endless auto-scroll */
 (function () {
   var wrap = document.querySelector('#about .ti-cards');
   if (!wrap) return;
@@ -5474,10 +5485,10 @@ requestAnimationFrame(frame);
   var originals = Array.prototype.slice.call(wrap.querySelectorAll('.ti-card'));
   if (!originals.length) return;
 
-  /* scroll-reveal ki .rv class hata di, warna cards hidden reh sakte hain */
+  /* remove scroll-reveal classes so cards never stay hidden */
   originals.forEach(function (c) { c.classList.remove('rv', 'in'); });
 
-  /* ek group = cards 2 baar, taake screen se wide rahe */
+  /* one group = the 4 cards + a duplicate set (so it is wider than the screen) */
   var group = document.createElement('div');
   group.className = 'ti-group';
   originals.forEach(function (c) { group.appendChild(c); });
@@ -5487,7 +5498,7 @@ requestAnimationFrame(frame);
     group.appendChild(dup);
   });
 
-  /* doosra same group = seamless loop */
+  /* second identical group = seamless loop */
   var group2 = group.cloneNode(true);
   group2.setAttribute('aria-hidden', 'true');
 
@@ -5498,37 +5509,33 @@ requestAnimationFrame(frame);
 
   wrap.innerHTML = '';
   wrap.appendChild(track);
-  wrap.classList.add('ti-marquee');<!--
-  TEAM HAWKS — SERVICE CARDS: MOUSE-FOLLOW TILT
-  Paste this just BEFORE </body> (after your other scripts).
-  Change MAX to tilt more (try 16) or less (try 8).
-
-<script>
-  (function () {
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    var MAX = 10; /* max tilt in degrees */
-
-    document.querySelectorAll('.service-card').forEach(function (card) {
-      card.addEventListener('pointermove', function (e) {
-        var r = card.getBoundingClientRect();
-        var x = (e.clientX - r.left) / r.width - 0.5;
-        var y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.setProperty('--ry', (x * MAX * 2).toFixed(2) + 'deg');
-        card.style.setProperty('--rx', (-y * MAX * 2).toFixed(2) + 'deg');
-      });
-
-      card.addEventListener('pointerleave', function () {
-        card.style.removeProperty('--rx');
-        card.style.removeProperty('--ry');
-      });
-    });
-  })();
-</script>
+  wrap.classList.add('ti-marquee');
 })();
 </script>
-  
-</body>
 
+<script>
+/* SERVICE CARDS: mouse-follow tilt (optional, was commented out before) */
+(function () {
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var MAX = 10; /* max tilt in degrees */
+
+  document.querySelectorAll('.service-card').forEach(function (card) {
+    card.addEventListener('pointermove', function (e) {
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.setProperty('--ry', (x * MAX * 2).toFixed(2) + 'deg');
+      card.style.setProperty('--rx', (-y * MAX * 2).toFixed(2) + 'deg');
+    });
+    card.addEventListener('pointerleave', function () {
+      card.style.removeProperty('--rx');
+      card.style.removeProperty('--ry');
+    });
+  });
+})();
+</script>
+</body>
 </html>
+  
