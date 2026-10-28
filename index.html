@@ -4295,6 +4295,63 @@ section {
 #about .ti-cards.ti-marquee .ti-card {
   min-height: 320px;
 }
+    /* ===== TESTIMONIALS: ONE LINE AUTO SCROLL ===== */
+html body #about .ti-cards.hk-marquee {
+  display: block !important;
+  position: relative;
+  left: 50%;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin: 30px 0 0 -50vw !important;
+  padding: 24px 0 34px !important;
+  overflow: hidden !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+html body #about .hk-marquee .hk-track {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: hk-ti-scroll 50s linear infinite !important; /* bara number = slow */
+}
+
+html body #about .hk-marquee:hover .hk-track {
+  animation-play-state: paused !important;
+}
+
+html body #about .hk-marquee .hk-group {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 20px;
+  padding-right: 20px;
+}
+
+html body #about .hk-marquee .ti-card {
+  flex: 0 0 380px !important;
+  width: 380px !important;
+  min-width: 380px !important;
+  max-width: 380px !important;
+  height: auto !important;
+  min-height: 300px !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  translate: none !important;
+}
+
+@keyframes hk-ti-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (max-width: 600px) {
+  html body #about .hk-marquee .ti-card {
+    flex-basis: 280px !important;
+    width: 280px !important;
+    min-width: 280px !important;
+    max-width: 280px !important;
+  }
+}
   </style>
 
 </head>
@@ -5534,6 +5591,33 @@ requestAnimationFrame(frame);
       card.style.removeProperty('--ry');
     });
   });
+})();
+</script>
+  <script>
+(function () {
+  var wrap = document.querySelector('#about .ti-cards');
+  if (!wrap || wrap.classList.contains('hk-marquee')) return;
+
+  var cards = Array.prototype.slice.call(wrap.querySelectorAll('.ti-card'));
+  if (!cards.length) return;
+
+  cards.forEach(function (c) { c.classList.remove('rv', 'in'); });
+
+  var g1 = document.createElement('div');
+  g1.className = 'hk-group';
+  cards.forEach(function (c) { g1.appendChild(c); });
+
+  var g2 = g1.cloneNode(true);
+  g2.setAttribute('aria-hidden', 'true');
+
+  var track = document.createElement('div');
+  track.className = 'hk-track';
+  track.appendChild(g1);
+  track.appendChild(g2);
+
+  wrap.innerHTML = '';
+  wrap.appendChild(track);
+  wrap.classList.add('hk-marquee');
 })();
 </script>
 </body>
