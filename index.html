@@ -8,6 +8,8 @@
   <meta name="description"
     content="Team Hawks delivers scalable outsourcing, customer experience, digital solutions and operational excellence.">
   <title>Team Hawks | Outsourcing Excellence</title>
+  <link rel="icon" type="image/jpeg" href="./team-hawks-site/logo.jpg">
+<link rel="apple-touch-icon" href="./team-hawks-site/logo.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -4098,23 +4100,14 @@ section {
   border-radius: 16px;
   background-color: #1f2124;
 
-  /* layers: 7 stars + gold aurora at the top + your gray card body */
+  /* layers: gold aurora at the top + gray card body (no star dots) */
   background-image:
-    radial-gradient(circle 1.6px at 12% 20%, #ffe9b8 55%, transparent 100%),
-    radial-gradient(circle 1.2px at 27% 38%, #ffffff 55%, transparent 100%),
-    radial-gradient(circle 1.8px at 41% 14%, #ffdca0 55%, transparent 100%),
-    radial-gradient(circle 1.2px at 58% 34%, #ffffff 55%, transparent 100%),
-    radial-gradient(circle 1.6px at 72% 18%, #ffe9b8 55%, transparent 100%),
-    radial-gradient(circle 1.2px at 86% 40%, #ffffff 55%, transparent 100%),
-    radial-gradient(circle 1.4px at 93% 12%, #ffdca0 55%, transparent 100%),
     radial-gradient(ellipse 60% 100% at 50% 0%, rgba(var(--glow), .38), transparent 75%),
     linear-gradient(150deg, #2b2d31, #1f2124);
   background-size:
-    100% 46%, 100% 46%, 100% 46%, 100% 46%, 100% 46%, 100% 46%, 100% 46%,
     240% 46%,
     100% 100%;
   background-position:
-    0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0,
     0% 0,
     0 0;
   background-repeat: no-repeat;
@@ -4139,7 +4132,6 @@ section {
   transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-6px);
   border-color: rgba(var(--glow), .65);
   background-position:
-    0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0,
     100% 0,
     0 0;
   box-shadow:
@@ -4591,6 +4583,41 @@ html body #about .hk-marquee .ti-card {
 @media (prefers-reduced-motion: reduce) {
   .clients-track { animation: none; }
 }
+    /* HERO BACKGROUND ANIMATION */
+#heroFx{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+  pointer-events:none;
+  display:block;
+}
+.hero-overlay::before,
+.hero-overlay::after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  filter:blur(70px);
+  pointer-events:none;
+}
+.hero-overlay::before{
+  width:520px;height:520px;
+  top:-160px;left:-120px;
+  background:radial-gradient(circle,rgba(245,166,35,.16),transparent 70%);
+  animation:hk-glow-a 12s ease-in-out infinite alternate;
+}
+.hero-overlay::after{
+  width:460px;height:460px;
+  top:40px;right:20%;
+  background:radial-gradient(circle,rgba(232,176,74,.11),transparent 70%);
+  animation:hk-glow-b 15s ease-in-out infinite alternate;
+}
+@keyframes hk-glow-a{to{transform:translate(160px,70px) scale(1.2)}}
+@keyframes hk-glow-b{to{transform:translate(-140px,60px) scale(1.15)}}
+@media (prefers-reduced-motion:reduce){
+  .hero-overlay::before,.hero-overlay::after{animation:none}
+}
   </style>
 
 </head>
@@ -4625,7 +4652,6 @@ html body #about .hk-marquee .ti-card {
         <a href="#services">Services</a>
         <a href="#industries">Industries</a>
         <a href="#why">Why Team Hawks</a>
-        <a href="#impact">Case Studies</a>
         <a href="#about">About Us</a>
         <a class="btn-custom btn-gold nav-cta" href="https://wa.me/923456115222" target="_blank"
           rel="noopener noreferrer">Contact Us ↗</a>
@@ -4637,7 +4663,7 @@ html body #about .hk-marquee .ti-card {
     <!-- HERO -->
     <section class="hero" id="home">
       
-      <div class="hero-overlay"></div>
+    <div class="hero-overlay"><canvas id="heroFx" aria-hidden="true"></canvas></div>
       <div class="wrap hero-grid">
         <div class="hero-content">
           <div class="eyebrow">Your Growth. Our Mission.</div>
@@ -4667,7 +4693,7 @@ html body #about .hk-marquee .ti-card {
             </video>
           </div>
           <div class="people-card">
-            <strong>250+</strong>
+           <strong>25+</strong>
             <b>Dedicated Professionals</b>
             <span>Delivering excellence across teams and industries.</span>
           </div>
@@ -5672,7 +5698,7 @@ html body #about .hk-marquee .ti-card {
   if (!el) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var target = 250, duration = 1800, start = null;
+var target = 25, duration = 1800, start = null;
   el.textContent = '0+';
 
   function tick(now) {
@@ -5895,6 +5921,81 @@ requestAnimationFrame(frame);
   var copy = group.cloneNode(true);
   copy.setAttribute('aria-hidden', 'true');
   track.appendChild(copy);
+})();
+</script>
+  <script>
+/* HERO BACKGROUND: floating gold particles + connecting lines */
+(function () {
+  var cv = document.getElementById('heroFx');
+  if (!cv) return;
+  var cx = cv.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, parts = [], visible = true;
+
+  function size() {
+    var r = cv.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.width = r.width * dpr;
+    H = cv.height = r.height * dpr;
+    var n = Math.round((r.width * r.height) / 14000);
+    n = Math.max(30, Math.min(n, 90));
+    parts = [];
+    for (var i = 0; i < n; i++) {
+      parts.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - .5) * .35 * dpr,
+        vy: (-0.15 - Math.random() * .35) * dpr,
+        r: (Math.random() * 1.6 + .5) * dpr,
+        a: Math.random() * .6 + .25
+      });
+    }
+  }
+  size();
+  window.addEventListener('resize', size);
+
+  function draw() {
+    cx.clearRect(0, 0, W, H);
+    var link = Math.min(W, H) * .16;
+
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      if (!reduce) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
+        if (p.x < -10) p.x = W + 10;
+        if (p.x > W + 10) p.x = -10;
+      }
+      for (var j = i + 1; j < parts.length; j++) {
+        var q = parts[j], dx = p.x - q.x, dy = p.y - q.y;
+        var d = Math.sqrt(dx * dx + dy * dy);
+        if (d < link) {
+          cx.beginPath();
+          cx.moveTo(p.x, p.y); cx.lineTo(q.x, q.y);
+          cx.strokeStyle = 'rgba(245,166,35,' + (0.16 * (1 - d / link)) + ')';
+          cx.lineWidth = Math.max(1, W * .0006);
+          cx.stroke();
+        }
+      }
+      cx.beginPath();
+      cx.arc(p.x, p.y, p.r, 0, 6.2832);
+      cx.fillStyle = 'rgba(255,210,122,' + p.a + ')';
+      cx.shadowColor = '#f5a623';
+      cx.shadowBlur = p.r * 5;
+      cx.fill();
+      cx.shadowBlur = 0;
+    }
+    if (!reduce && visible) requestAnimationFrame(draw);
+  }
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      var was = visible;
+      visible = es[0].isIntersecting;
+      if (visible && !was && !reduce) requestAnimationFrame(draw);
+    }).observe(cv);
+  }
+  draw();
 })();
 </script>
 </body>
