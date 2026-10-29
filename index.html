@@ -4535,7 +4535,62 @@ html body #about .hk-marquee .ti-card {
   }
 }
 
+/* OUR CLIENTS — ONE LINE AUTO SCROLL */
+.clients-viewport {
+  --cl-w: 260px;      /* box width */
+  --cl-gap: 20px;
+  --cl-speed: 28s;    /* bara number = slow */
 
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin: 42px 0 0 -50vw;   /* full screen width */
+  padding: 10px 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.clients-track {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: clients-scroll var(--cl-speed) linear infinite;
+  will-change: transform;
+}
+
+.clients-viewport:hover .clients-track {
+  animation-play-state: paused;
+}
+
+.clients-group {
+  display: flex;
+  flex: 0 0 auto;
+  gap: var(--cl-gap);
+  padding-right: var(--cl-gap);
+}
+
+.clients-viewport .client-logo-box {
+  flex: 0 0 var(--cl-w);
+  width: var(--cl-w);
+}
+
+@keyframes clients-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (max-width: 650px) {
+  .clients-viewport {
+    --cl-w: 190px;
+    --cl-gap: 12px;
+    --cl-speed: 22s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clients-track { animation: none; }
+}
   </style>
 
 </head>
@@ -5107,27 +5162,19 @@ html body #about .hk-marquee .ti-card {
       partnerships and solutions that drive growth.
     </p>
 
-    <div class="clients-logo-grid">
-      <div class="client-logo-box">
-        <img src="./our%20clinets/client1.jpeg" alt="Client 1">
-      </div>
-      <div class="client-logo-box">
-        <img src="./our%20clinets/client2.jpeg" alt="Client 2">
-      </div>
-      <div class="client-logo-box">
-        <img src="./our%20clinets/client3.jpeg" alt="Client 3">
-      </div>
-      <div class="client-logo-box">
-        <img src="./our%20clinets/client4.jpeg" alt="Client 4">
-      </div>
-      <div class="client-logo-box">
-        <img src="./our%20clinets/client5.jpeg" alt="Client 5">
-      </div>
-      <div class="client-logo-box">
-        <img src="./our%20clinets/client6.jpeg" alt="Client 6">
-      </div>
+<div class="clients-viewport">
+  <div class="clients-track" id="clientsTrack">
+    <div class="clients-group">
+      <div class="client-logo-box"><img src="./our%20clinets/client1.jpeg" alt="Client 1"></div>
+      <div class="client-logo-box"><img src="./our%20clinets/client2.jpeg" alt="Client 2"></div>
+      <div class="client-logo-box"><img src="./our%20clinets/client3.jpeg" alt="Client 3"></div>
+      <div class="client-logo-box"><img src="./our%20clinets/client4.jpeg" alt="Client 4"></div>
+      <div class="client-logo-box"><img src="./our%20clinets/client5.jpeg" alt="Client 5"></div>
+      <div class="client-logo-box"><img src="./our%20clinets/client6.jpeg" alt="Client 6"></div>
+      <div class="client-logo-box"><img src="./our%20clinets/client7.jpeg" alt="Client 7"></div>
     </div>
   </div>
+</div>
 </section>
 
     <!-- CONTACT FORM -->
@@ -5752,7 +5799,6 @@ if('IntersectionObserver' in window)new IntersectionObserver(function(es){run=es
 requestAnimationFrame(frame);
 })();
 </script>
-  <script>
 <script>
 /* TESTIMONIALS MARQUEE: one row, endless auto-scroll */
 (function () {
@@ -5839,6 +5885,16 @@ requestAnimationFrame(frame);
   wrap.innerHTML = '';
   wrap.appendChild(track);
   wrap.classList.add('hk-marquee');
+})();
+</script>
+  <script>
+(function () {
+  var track = document.getElementById('clientsTrack');
+  if (!track) return;
+  var group = track.querySelector('.clients-group');
+  var copy = group.cloneNode(true);
+  copy.setAttribute('aria-hidden', 'true');
+  track.appendChild(copy);
 })();
 </script>
 </body>
