@@ -4951,6 +4951,49 @@ html.nav-lock body { overflow: hidden; }
     transform: scale(3.2);
   }
 }
+    /* =====================================================
+   TEAM HAWKS — HEADING TEXT ANIMATION (blur-in, word by word)
+===================================================== */
+.hk-w {
+  display: inline-block;
+  white-space: nowrap;
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(.55em) scale(.96);
+  will-change: transform, opacity, filter;
+}
+
+.hk-in .hk-w {
+  animation: hk-word-in .95s cubic-bezier(.22, 1, .36, 1) both;
+  animation-delay: calc(var(--i) * 70ms);
+}
+
+@keyframes hk-word-in {
+  0% {
+    opacity: 0;
+    filter: blur(14px);
+    transform: translateY(.55em) scale(.96);
+  }
+  60% {
+    opacity: 1;
+    filter: blur(2px);
+    text-shadow: 0 0 26px rgba(245, 166, 35, .55);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+    text-shadow: 0 0 0 rgba(245, 166, 35, 0);
+  }
+}
+
+/* gold gradient headline: gradient har word par lagta hai */
+.hero h1 .gold-line .hk-w {
+  background: linear-gradient(100deg, #ffe29a, #f5a623 55%, #b97e1e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
   </style>
 
 </head>
@@ -6529,6 +6572,87 @@ requestAnimationFrame(frame);
       document.getElementById('menuToggle').click();
     }
   });
+})();
+</script>
+  <script>
+/* HEADINGS: blur-in word-by-word animation */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var SELECTOR = [
+    '.hero h1',
+    '.section-title',
+    '.ti-title',
+    '.work-process-heading h2',
+    '.clients-heading',
+    '.contact-heading h2',
+    '.cta-title',
+    '.hk-reach h3'
+  ].join(',');
+
+  var heads = document.querySelectorAll(SELECTOR);
+  if (!heads.length) return;
+
+  /* text ke words ko spans mein todta hai (gold spans bhi safe rehte hain) */
+  function split(node, counter) {
+    Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+      if (child.nodeType === 3) {
+        var parts = child.textContent.split(/(\s+)/);
+        var frag = document.createDocumentFragment();
+        parts.forEach(function (part) {
+          if (!part) return;
+          if (/^\s+$/.test(part)) {
+            frag.appendChild(document.createTextNode(' '));
+          } else {
+            var w = document.createElement('span');
+            w.className = 'hk-w';
+            w.setAttribute('aria-hidden', 'true');
+            w.style.setProperty('--i', counter.n++);
+            w.textContent = part;
+            frag.appendChild(w);
+          }
+        });
+        child.parentNode.replaceChild(frag, child);
+      } else if (child.nodeType === 1 && child.tagName !== 'BR') {
+        split(child, counter);
+      }
+    });
+  }
+
+  heads.forEach(function (h) {
+    h.setAttribute('aria-label', h.textContent.replace(/\s+/g, ' ').trim());
+    split(h, { n: 0 });
+  });
+
+  function start() {
+    if (!('IntersectionObserver' in window)) {
+      heads.forEach(function (h) { h.classList.add('hk-in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('hk-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '0px 0px -6% 0px' });
+    heads.forEach(function (h) { io.observe(h); });
+  }
+
+  /* intro video khatam hone ke baad shuru ho */
+  var root = document.documentElement;
+  if (root.classList.contains('intro-lock')) {
+    var mo = new MutationObserver(function () {
+      if (!root.classList.contains('intro-lock')) {
+        mo.disconnect();
+        start();
+      }
+    });
+    mo.observe(root, { attributes: true, attributeFilter: ['class'] });
+  } else {
+    start();
+  }
 })();
 </script>
 </body>
