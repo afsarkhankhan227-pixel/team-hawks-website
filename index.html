@@ -6565,17 +6565,41 @@ requestAnimationFrame(frame);
   window.addEventListener('load', function () { move(current()); });
   move(current());
 
-  /* active link follows the section you are scrolling through */
+   /* active link follows the section closest to the top + stays on the clicked link */
   var ids = links.map(function (l) { return (l.getAttribute('href') || '').replace('#', ''); });
-  function spy() {
-    var active = 0;
-    ids.forEach(function (id, i) {
-      var s = id && document.getElementById(id);
-      if (s && s.getBoundingClientRect().top <= 220) active = i;
-    });
-    links.forEach(function (l, i) { l.classList.toggle('active', i === active); });
+  var locked = false, lockTimer, failSafe;
+
+  function setActive(index) {
+    links.forEach(function (l, i) { l.classList.toggle('active', i === index); });
     move(current());
   }
+
+  function spy() {
+    if (locked) {
+      /* unlock once the smooth scroll has stopped */
+      clearTimeout(lockTimer);
+      lockTimer = setTimeout(function () { locked = false; }, 150);
+      return;
+    }
+    var active = 0, best = -Infinity;
+    ids.forEach(function (id, i) {
+      var s = id && document.getElementById(id);
+      if (!s) return;
+      var top = s.getBoundingClientRect().top;
+      if (top <= 220 && top > best) { best = top; active = i; }   /* closest to the top wins */
+    });
+    setActive(active);
+  }
+
+  links.forEach(function (l, i) {
+    l.addEventListener('click', function () {
+      locked = true;
+      setActive(i);
+      clearTimeout(failSafe);
+      failSafe = setTimeout(function () { locked = false; }, 1500); /* in case no scroll happens */
+    });
+  });
+
   window.addEventListener('scroll', spy, { passive: true });
   spy();
 
