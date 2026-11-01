@@ -4994,6 +4994,30 @@ html.nav-lock body { overflow: hidden; }
   background-clip: text;
   color: transparent;
 }
+    /* BIGGER HAWK ABOVE "WHAT OUR CLIENTS SAY" */
+#about .ti-head .eagle-mark {
+  width: 320px;            /* change this to make it bigger or smaller */
+  max-width: 100%;
+  margin: -40px auto -50px; /* pulls in the empty space around the hawk */
+  filter: brightness(1.1) contrast(1.6)
+          drop-shadow(0 0 22px rgba(245, 166, 35, .35));
+}
+
+/* tablet */
+@media (max-width: 900px) {
+  #about .ti-head .eagle-mark {
+    width: 280px;
+    margin: -30px auto -40px;
+  }
+}
+
+/* mobile */
+@media (max-width: 600px) {
+  #about .ti-head .eagle-mark {
+    width: 230px;
+    margin: -24px auto -30px;
+  }
+}
   </style>
 
 </head>
