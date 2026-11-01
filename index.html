@@ -5103,6 +5103,32 @@ html body section#how-we-work.work-process {
     margin-top: -55px;
   }
 }
+    /* HAWK: crop the empty black space inside the image, no overlap */
+#about .ti-head .eagle-mark {
+  width: 320px;
+  height: 130px;            /* visible height of the hawk area. Bigger = more space */
+  object-fit: cover;
+  object-position: center 50%;
+  margin: 25px auto 10px;   /* 25px = small gap under the cards */
+}
+
+/* tablet */
+@media (max-width: 900px) {
+  #about .ti-head .eagle-mark {
+    width: 280px;
+    height: 115px;
+    margin: 20px auto 10px;
+  }
+}
+
+/* mobile */
+@media (max-width: 600px) {
+  #about .ti-head .eagle-mark {
+    width: 230px;
+    height: 95px;
+    margin: 15px auto 8px;
+  }
+}
   </style>
 
 </head>
