@@ -5048,6 +5048,61 @@ html.nav-lock body { overflow: hidden; }
     transform: none;
   }
 }
+    /* HOW WE WORK: numbers centered on cards + line */
+#how-we-work .process-number {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line goes from the center of 01 to the center of 04 */
+#how-we-work .process-timeline::before {
+  left: calc((100% - 66px) / 8) !important;
+  right: calc((100% - 66px) / 8) !important;
+  top: 26px;
+}
+
+/* small phones: keep the number on the left like before */
+@media (max-width: 560px) {
+  #how-we-work .process-number {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+    /* REMOVE EXTRA SPACE ABOVE THE HAWK */
+
+/* 1. less space at the bottom of How We Work */
+html body section#how-we-work.work-process {
+  padding-bottom: 20px;
+}
+
+/* 2. no top padding on the clients section */
+.ti-clients {
+  padding-top: 0;
+}
+
+/* 3. pull the hawk up to cancel the black space inside the image */
+#about .ti-head .eagle-mark {
+  margin-top: -90px;      /* more negative = hawk goes higher, space gets smaller */
+  margin-bottom: -50px;
+}
+
+/* tablet */
+@media (max-width: 900px) {
+  #about .ti-head .eagle-mark {
+    margin-top: -70px;
+  }
+}
+
+/* mobile */
+@media (max-width: 600px) {
+  html body section#how-we-work.work-process {
+    padding-bottom: 10px;
+  }
+
+  #about .ti-head .eagle-mark {
+    margin-top: -55px;
+  }
+}
   </style>
 
 </head>
